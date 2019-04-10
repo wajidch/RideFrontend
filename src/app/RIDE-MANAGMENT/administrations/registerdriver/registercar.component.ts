@@ -10,6 +10,7 @@ import { environment } from '../../../../environments/environment';
 
 export class registercarComponent implements OnInit {
     carForm: FormGroup;
+    carList;
     constructor(private carservice: CarService) { }
 
     ngOnInit() {
@@ -17,11 +18,19 @@ export class registercarComponent implements OnInit {
             name: new FormControl(),
             password: new FormControl(),
         })
+        this.listOfCar();
     }
     addcar(val) {
-        console.log("valuess", val, environment.apiUrl)
         this.carservice.addCar(val.name, val.password).subscribe(res => {
             console.log("ress", res)
+            this.listOfCar();
+        })
+    }
+    listOfCar() {
+
+        this.carservice.listOfcar().subscribe(res => {
+
+            this.carList = res;
         })
     }
 }

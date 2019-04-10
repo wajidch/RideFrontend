@@ -30,33 +30,16 @@ export class CarService implements OnInit {
     }
 
 
-    userList() {
+    listOfcar() {
         const headers = new HttpHeaders();
         headers.append('Content-Type', 'application/json');
         //    headers.append("Access-Control-Allow-Origin", "*")
 
-        return this.http.get(environment.apiUrl + 'admin/user-list',
+        return this.http.get(environment.apiUrl + 'cars/listOfCar',
             { headers: headers })
 
     }
 
-    notificationList() {
-        const headers = new HttpHeaders();
-        headers.append('Content-Type', 'application/json');
-        //    headers.append("Access-Control-Allow-Origin", "*")
 
-        return this.http.get(environment.apiUrl + 'admin/notification-list',
-            { headers: headers })
-    }
-
-    userSearch(searchObj) {
-        const headers = new HttpHeaders();
-        headers.append('Content-Type', 'application/json');
-        //    headers.append("Access-Control-Allow-Origin", "*")
-
-        return this.http.get(environment.apiUrl + 'User/userSearch?gender=' + searchObj.gender + "&deleted=" + searchObj.deleted,
-            { headers: headers })
-
-    }
 
 }
