@@ -1,0 +1,229 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-rose card-header-icon">
+            <div class="card-icon">
+              <i class="material-icons">assignment</i>
+            </div>
+            <h4 class="card-title">Register Car</h4>
+            <button class="btn btn-primary btn-round mat-raised-button pull-right" data-toggle="modal"
+              data-target="#modal-add" style="margin-top:-30px" mat-raised-button><span
+                class="mat-button-wrapper">Create</span>
+              <div class="mat-button-ripple mat-ripple" matripple></div>
+              <div class="mat-button-focus-overlay"></div>
+            </button>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th class="text-center">#</th>
+                    <th class="text-center">Driver Name</th>
+                    <th>Rides</th>
+                    <th>Status</th>
+                    <th class="text-right">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="text-center">1</td>
+                    <td class="text-center">Maryam Amir</td>
+                    <td> 20</td>
+                    <td><span class="badge badge-danger" data-toggle="modal" data-target="#modal-fill">On Ride</span>
+                    </td>
+                    <td class="td-actions text-right">
+                      <button mat-raised-button type="button" data-toggle="modal" data-target="#modal-edit"
+                        class="btn btn-success btn-link">
+                        <i class="material-icons">edit</i>
+                      </button>
+                      <button mat-raised-button type="button" class="btn btn-danger btn-link">
+                        <i class="material-icons">close</i>
+                      </button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="text-center">1</td>
+                    <td class="text-center">Maryam Amir</td>
+                    <td> 20</td>
+                    <td><span class="badge badge-danger">On Ride</span></td>
+                    <td class="td-actions text-right">
+                      <button mat-raised-button type="button" data-toggle="modal" data-target="#modal-edit"
+                        class="btn btn-success btn-link">
+                        <i class="material-icons">edit</i>
+                      </button>
+                      <button mat-raised-button type="button" class="btn btn-danger btn-link">
+                        <i class="material-icons">close</i>
+                      </button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="text-center">1</td>
+                    <td class="text-center">Maryam Amir</td>
+                    <td> 20</td>
+                    <td><span class="badge badge-danger">On Ride</span></td>
+                    <td class="td-actions text-right">
+                      <button mat-raised-button type="button" data-toggle="modal" data-target="#modal-edit"
+                        class="btn btn-success btn-link">
+                        <i class="material-icons">edit</i>
+                      </button>
+                      <button mat-raised-button type="button" class="btn btn-danger btn-link">
+                        <i class="material-icons">close</i>
+                      </button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="text-center">1</td>
+                    <td class="text-center">Maryam Amir</td>
+                    <td> 20</td>
+                    <td><span class="badge badge-danger">On Ride</span></td>
+                    <td class="td-actions text-right">
+                      <button mat-raised-button type="button" data-toggle="modal" data-target="#modal-edit"
+                        class="btn btn-success btn-link">
+                        <i class="material-icons">edit</i>
+                      </button>
+                      <button mat-raised-button type="button" class="btn btn-danger btn-link">
+                        <i class="material-icons">close</i>
+                      </button>
+                    </td>
+                  </tr>
+
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="modal-add" tabindex="-1" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title" id="myModalLabel">Add Car</h4>
+          <button type="button" class="close" data-dismiss="modal">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <form [formGroup]='carForm'>
+          <div class="modal-body">
+            <div class="row form-type-round">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="input-normal">Car Number</label>
+                  <input type="text" class="form-control" formControlName='name' id="input-normal">
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="input-normal">Password</label>
+                  <input type="password" class="form-control" formControlName='password' id="input-normal">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-bold btn-pure btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-bold btn-pure btn-primary" (click)='addcar(carForm.value)'>Save
+              changes</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="modal-edit" tabindex="-1" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title" id="myModalLabel">Edit Driver</h4>
+          <button type="button" class="close" data-dismiss="modal">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="row form-type-round">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="input-normal">Driver Name</label>
+                <input type="text" class="form-control" id="input-normal" value="Maryam Amiri" />
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="input-normal">Password</label>
+                <input type="password" class="form-control" id="input-normal" value="12344" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-bold btn-pure btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-bold btn-pure btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal modal-fill fade" data-backdrop="false" id="modal-fill" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Rides Detail</h5>
+          <button type="button" class="close" data-dismiss="modal">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <table class="table table-sm">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Customer Name</th>
+                <th>From / Destination Place</th>
+                <th>Amount</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="bg-danger">
+                <th scope="row">1</th>
+                <td>Mark</td>
+                <td>Lahore / Karachi</td>
+                <td>2000</td>
+              </tr>
+
+              <tr>
+                <th scope="row">1</th>
+                <td>Mark</td>
+                <td>Lahore / Karachi</td>
+                <td>2000</td>
+              </tr>
+
+              <tr>
+                <th scope="row">1</th>
+                <td>Mark</td>
+                <td>Lahore / Karachi</td>
+                <td>2000</td>
+              </tr>
+
+              <tr>
+                <th scope="row">1</th>
+                <td>Mark</td>
+                <td>Lahore / Karachi</td>
+                <td>2000</td>
+              </tr>
+            </tbody>
+          </table>
+          <br><br><br><br><br><br>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</div>
