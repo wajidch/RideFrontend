@@ -25,41 +25,14 @@
             </tr>
           </thead>
           <tbody>
-            <tr >
-              <th >1</th>
-              <td>Mark</td>
-              <td>Lahore / Karachi</td>
-              <td>3/10/2019 1:59 AM</td>
-              <td>3/10/2019 2:30 AM</td>
+            <tr *ngFor = "let ride of rides; let i=index;" >
+              <td> {{i+1}} </td>
+              <td>{{ride.customer}}</td>
+              <td>{{ride.startPoint}} / {{ride.endPoint}}</td>
+              <td>{{ride.startTime}}</td>
+              <td>{{ride.endTime}}</td>
             </tr>
-          <tr >
-              <th >1</th>
-              <td>Mark</td>
-              <td>Lahore / Karachi</td>
-              <td>3/10/2019 1:59 AM</td>
-              <td>3/10/2019 2:30 AM</td>
-            </tr>
-            <tr >
-                <th >1</th>
-                <td>Mark</td>
-                <td>Lahore / Karachi</td>
-                <td>3/10/2019 1:59 AM</td>
-                <td>3/10/2019 2:30 AM</td>
-              </tr>
-              <tr >
-                  <th >1</th>
-                  <td>Mark</td>
-                  <td>Lahore / Karachi</td>
-                  <td>3/10/2019 1:59 AM</td>
-                  <td>3/10/2019 2:30 AM</td>
-                </tr>
-                 <tr >
-              <th >1</th>
-              <td>Mark</td>
-              <td>Lahore / Karachi</td>
-              <td>3/10/2019 1:59 AM</td>
-              <td>3/10/2019 2:30 AM</td>
-            </tr>
+         
             
           </tbody>
         </table>
