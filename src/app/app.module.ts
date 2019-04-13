@@ -60,7 +60,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ApiService } from './services/api.service';
 import { DataService } from './services/dataService';
 import { AuthService } from './services/auth/auth.service';
-import { CarService } from './services/car.service';
+import { AppServiceManager } from './services/appServiceManager';
 
 @NgModule({
   exports: [
@@ -129,7 +129,7 @@ export class MaterialModule { }
     ApiService,
     AuthService,
     DataService,
-    CarService
+    AppServiceManager
   ],
   bootstrap: [AppComponent]
 })

@@ -6,7 +6,7 @@ import { MaterialModule } from '../../app.module';
 
 
 import { administrationsRoutes } from './administrations.routing';
-import { registercarComponent } from './registerdriver/registercar.component';
+import { registercarComponent } from './registercar/registercar.component';
 import { allridesComponent } from './allrides/allrides.component';
 import { centralmanagerComponent } from './centralmanager/centralmanager.component';
 import { changepasswordComponent } from './changepassword/changepassword.component';
