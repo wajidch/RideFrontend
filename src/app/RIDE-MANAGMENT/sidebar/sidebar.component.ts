@@ -49,7 +49,7 @@ export const ROUTES: RouteInfo[] = [{
     icontype: 'apps',
     collapse: 'driverpage',
     children: [
-        { path: 'createride', title: 'createride', ab: 'CR' },
+        { path: 'createride', title: 'Create Ride', ab: 'CR' },
         { path: 'driver', title: 'Driver Detail', ab: 'DD' },
     ]
 },
