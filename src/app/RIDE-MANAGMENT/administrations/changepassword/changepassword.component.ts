@@ -5,9 +5,6 @@ import { map, startWith } from 'rxjs/operators';
 import { CarModel } from 'app/models/car.models';
 import { AppServiceManager } from 'app/services/appServiceManager';
 
-export interface User {
-    name: string;
-}
 
 @Component({
     selector: 'app-changepassword-cmp',

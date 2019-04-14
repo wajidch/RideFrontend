@@ -9,5 +9,6 @@ export class DriverModel{
      city: string;
      address: string;
      dob: Date;
+     status: string;
      rides:RideModel[];
 }

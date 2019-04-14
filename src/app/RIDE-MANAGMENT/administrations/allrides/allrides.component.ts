@@ -19,7 +19,6 @@ export class allridesComponent implements OnInit {
     getAll() {
         this.appServiceManager.get('rides').subscribe(res => {
             this.rides = res;
-            console.log(this.rides);
         });
     }
 }
