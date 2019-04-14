@@ -1,3 +1,5 @@
+import { DriverModel } from './driver.models';
+import { CarModel } from './car.models';
 
 export class RideModel{
     _id: string;
@@ -12,5 +14,10 @@ export class RideModel{
     amount: number;
     note: string;
     customer: string;
-    driver: string;
+    driver: DriverModel;
+    car: CarModel; 
+    constructor(){
+        this.driver = new DriverModel();
+        this.car = new CarModel();
+    }
 }

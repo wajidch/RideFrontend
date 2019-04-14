@@ -16,8 +16,9 @@ declare const $: any;
     templateUrl: 'centralmanager.component.html'
 })
 export class centralmanagerComponent implements OnInit {
-   
-    @ViewChild('btnModalcreatePlannedRide')btnModalcreatePlannedRide: ElementRef;
+
+    @ViewChild('btnModalcreatePlannedRide') btnModalcreatePlannedRide: ElementRef;
+    @ViewChild('btnModalcreatePlannedShift') btnModalcreatePlannedShift: ElementRef;
     
     //All drivers and rides
     rides: RideModel[] = [];
@@ -28,19 +29,24 @@ export class centralmanagerComponent implements OnInit {
     todayPlannedRides: RideModel[] = [];
 
     //Today Shift
+    todayPlannedShifts: any[] = [];
     myControl = new FormControl();
     cars: CarModel[] = [];
-    car: CarModel;
     filteredCars: Observable<CarModel[]>;
+
+    driverControl = new FormControl();
+    filteredDrivers: Observable<DriverModel[]>;
 
 
     constructor(private appServiceManager: AppServiceManager) { }
     ngOnInit() {
         this.ride = new RideModel();
+      
         this.getAllDrivers();
         this.getAllRides();
         this.getTodayPlannedRides();
-        this.car = new CarModel();
+        this.getTodayPlannedShifts();
+
         this.appServiceManager.get('cars').subscribe(res => {
             this.cars = res;
 
@@ -81,11 +87,46 @@ export class centralmanagerComponent implements OnInit {
     getAllDrivers() {
         this.appServiceManager.get('drivers').subscribe(res => {
             this.drivers = res;
+            this.filteredDrivers = this.driverControl.valueChanges
+                .pipe(
+                    startWith<string | DriverModel>(''),
+                    map(value => typeof value === 'string' ? value : value.firstName),
+                    map(name => name ? this._driverFilter(name) : this.drivers.slice())
+                );
         });
+    }
+
+    driverDisplayFn(driver?: DriverModel): string | undefined {
+        return driver ? driver.firstName : undefined;
+    }
+
+    private _driverFilter(name: string): DriverModel[] {
+        const filterValue = name.toLowerCase();
+
+        return this.drivers.filter(driver => driver.firstName.toLowerCase().indexOf(filterValue) === 0);
     }
     getAllRides() {
         this.appServiceManager.get('rides').subscribe(res => {
             this.rides = res;
+        });
+    }
+
+    createTodayPlanShift() { 
+        let obj = {
+            car : this.myControl.value,
+            driver : this.driverControl.value
+        }
+        var postData = JSON.stringify(obj);
+        this.appServiceManager.post('rides/todayPlannedShifts', postData).subscribe(res => {
+            this.btnModalcreatePlannedShift.nativeElement.click();
+            this.getTodayPlannedShifts();
+        });
+    }
+
+    getTodayPlannedShifts() {
+        this.appServiceManager.get('rides/todayPlannedShifts').subscribe(res => {
+            this.todayPlannedShifts = res;
+            console.log(this.todayPlannedShifts );
         });
     }
 }
