@@ -5,6 +5,7 @@ import { AuthService } from 'app/services/auth/auth.service';
 import { Response } from '@angular/http';
 import { HttpResponse } from '@angular/common/http';
 import { map } from 'rxjs/operators';
+import {AppServiceManager} from 'app/services/appServiceManager';
 
 declare var $: any;
 
@@ -15,15 +16,16 @@ declare var $: any;
 
 export class LoginComponent implements OnInit, OnDestroy {
 
-    private emailNM: string;
-    private passwordNM: string;
+     carNumber: string;
+     password: string;
 
     test: Date = new Date();
     private toggleButton: any;
     private sidebarVisible: boolean;
     private nativeElement: Node;
 
-    constructor(private auth: AuthService, private element: ElementRef, private router: Router, private route: ActivatedRoute) {
+    constructor(private auth: AuthService, private element: ElementRef, private router: Router, private route: ActivatedRoute,
+        private appServiceManager: AppServiceManager) {
         this.nativeElement = element.nativeElement;
         this.sidebarVisible = false;
     }
@@ -42,23 +44,45 @@ export class LoginComponent implements OnInit, OnDestroy {
     }
 
     login(){
-
-        this.auth.login(this.emailNM, this.passwordNM);
-        
-        if(localStorage.getItem('status')=="200"){
-            console.log(localStorage.getItem('token'));
-            console.log(localStorage.getItem('error'));
-            console.log(localStorage.getItem('status'));
-            console.log(localStorage.getItem('redirectTo'));
-            this.router.navigate([localStorage.getItem('redirectTo')], { relativeTo: this.route}); 
-        }else{
-            console.log(localStorage.getItem('token'));
-            console.log(localStorage.getItem('error'));
-            console.log(localStorage.getItem('status'));
-            console.log(localStorage.getItem('redirectTo'));
-        }
-        
+        var obj = {
+            carNumber: this.carNumber,
+            password: this.password
+        };
+        this.appServiceManager.post('cars/login',JSON.stringify(obj)).subscribe((res)=>{
+           if(res.status==true){
+               console.log(res.car);
+               localStorage.setItem('car',JSON.stringify(res.car));
+            this.router.navigateByUrl('dashboard');
+           } else {
+               alert(res.error);
+           }
+        },(error)=>{
+            if(error.status==401){
+                alert(error.statusText);
+               } else {
+                   alert(error);
+               }
+        });
     }
+
+    // login(){
+
+    //     this.auth.login(this.emailNM, this.passwordNM);
+        
+    //     if(localStorage.getItem('status')=="200"){
+    //         console.log(localStorage.getItem('token'));
+    //         console.log(localStorage.getItem('error'));
+    //         console.log(localStorage.getItem('status'));
+    //         console.log(localStorage.getItem('redirectTo'));
+    //         this.router.navigate([localStorage.getItem('redirectTo')], { relativeTo: this.route}); 
+    //     }else{
+    //         console.log(localStorage.getItem('token'));
+    //         console.log(localStorage.getItem('error'));
+    //         console.log(localStorage.getItem('status'));
+    //         console.log(localStorage.getItem('redirectTo'));
+    //     }
+        
+    // }
 
     sidebarToggle() {
         var toggleButton = this.toggleButton;

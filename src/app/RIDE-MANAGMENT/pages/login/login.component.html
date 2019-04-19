@@ -22,7 +22,7 @@
             </div>
             <div class="card-body ">
               <p class="card-description text-center">Or Be Classical</p>
-              <span class="bmd-form-group">
+              <!-- <span class="bmd-form-group">
                 <div class="input-group">
                   <div class="input-group-prepend">
                     <span class="input-group-text">
@@ -31,15 +31,15 @@
                   </div>
                   <input type="text" class="form-control" placeholder="First Name...">
                 </div>
-              </span>
+              </span> -->
               <span class="bmd-form-group">
                 <div class="input-group">
                   <div class="input-group-prepend">
                     <span class="input-group-text">
-                      <i class="material-icons">email</i>
+                      <i class="material-icons">commute</i>
                     </span>
                   </div>
-                  <input type="email" name="email" [(ngModel)]="emailNM" class="form-control" placeholder="Email...">
+                  <input type="text" name="carNumber" [(ngModel)]="carNumber" class="form-control" placeholder="Car Number...">
                 </div>
               </span>
               <span class="bmd-form-group">
@@ -49,13 +49,13 @@
                       <i class="material-icons">lock_outline</i>
                     </span>
                   </div>
-                  <input type="password" name="password" [(ngModel)]="passwordNM" class="form-control" placeholder="Password...">
+                  <input type="password" name="password" [(ngModel)]="password" class="form-control" placeholder="Password...">
                 </div>
               </span>
             </div>
             <div class="card-footer justify-content-center">
               <!-- <button type="submit"  class="btn btn-rose btn-link btn-lg">Lets Go</button> -->
-              <button mat-raised-button type="submit" class="btn btn-rose btn-link btn-lg">Enregistrer</button>
+              <button mat-raised-button type="submit" class="btn btn-rose btn-link btn-lg">Login</button>
             </div>
           </div>
         </form>
