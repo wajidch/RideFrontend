@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AppServiceManager } from 'app/services/appServiceManager';
 import { RideModel } from 'app/models/ride.models';
+import { DriverModel } from 'app/models/driver.models';
 
 
 @Component({
@@ -8,21 +9,28 @@ import { RideModel } from 'app/models/ride.models';
     templateUrl: 'driver.component.html'
 })
 
-export class driverComponent implements  OnInit {
- 
-    car:any;
-    myLastRides: RideModel[] = [];
+export class driverComponent implements OnInit {
 
-    constructor(private appServiceManager: AppServiceManager){}
+    car: any;
+    myLastRides: RideModel[] = [];
+    driver: DriverModel;
+    constructor(private appServiceManager: AppServiceManager) { }
     ngOnInit(): void {
+        this.driver = new DriverModel();
         this.car = JSON.parse(localStorage.getItem("car"));
-     this.getLastRides();
+        this.getDriver(this.car);
+        this.getLastRides();
+    }
+    getDriver(car) {
+        this.appServiceManager.get('drivers/' + car._id).subscribe(res => {
+            this.driver = res;
+        });
     }
     getLastRides() {
-        this.appServiceManager.get('drivers/mylastrides/' + this.car._id).subscribe((mylastrides)=>{
+        this.appServiceManager.get('drivers/mylastrides/' + this.car._id).subscribe((mylastrides) => {
             this.myLastRides = mylastrides;
         });
     }
 
-    
+
 }

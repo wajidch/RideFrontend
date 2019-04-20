@@ -18,31 +18,34 @@
                                       <h5>My Status</h5>
                                       <div class="d-flex flex-column flex-sm-row gap-items-2 gap-y mt-16">
                                         <div class="file-group file-group-inline">
-                                          <button class="btn btn-sm btn-w-lg btn-outline  btn-round btn-screen" type="button">On a ride</button>
+                                          <button  class="btn btn-sm btn-w-lg btn-outline  btn-round btn-screen" type="button">On a ride</button>
                                         </div>
                           
-                                        <a class="btn btn-sm btn-w-lg btn-outline btn-round btn-screen" href="#">Ready for Ride</a>
+                                        <a class="btn btn-sm btn-w-lg btn-outline btn-round btn-screen" [routerLink]="">Ready for Ride</a>
                                       </div>
                                     </div>
                                   </div>
                                   <hr>
                                 </div>
-                                <div class="media" style="margin-top:51px">
+                                <div class="media col-md-12" style="margin-top:30px">
                                     <div class="media-body">
-                                      <p><strong>Maryam Amiri</strong></p>
+                                      <p><strong>{{driver.firstName}}  {{driver.lastName}}</strong></p>
                                     </div>
                           
-                                    <span class="badge badge-danger">On Ride</span>  
+                                    <span class="badge" [ngClass]="{'badge-success':driver.status == 'online',
+                                    'badge-warning':driver.status == 'offline',
+                                    'badge-danger':driver.status=='onride'}">{{driver.status}}
+                                  </span>  
                                      <hr>
                                   </div>
-                                
+<!--                                 
                                   <div class="media">
                                       <div class="media-body">
                                         <p><strong>Maryam Amiri</strong></p>
                                       </div>
                                       <span class="badge badge-danger">Start Ride</span>    
                                        <hr>
-                                    </div>
+                                    </div> -->
                               </form>
                 </div>
              </div>
@@ -81,7 +84,7 @@
                </div>
            </div>
 
-           <div class="col-md-8">
+           <!-- <div class="col-md-8">
                 <div class="card ">
                   <div class="card-header card-header-rose card-header-icon">
                         <div class="card-text">
@@ -126,7 +129,7 @@
                               </div>
                   </div>
                </div>
-           </div>
+           </div> -->
 
            <div class="col-md-4">
                 <div class="card ">
