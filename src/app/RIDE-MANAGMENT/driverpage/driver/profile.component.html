@@ -1,0 +1,54 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card ">
+          <div class="card-header card-header-rose card-header-icon">
+            <div class="card-text">
+              <h4 class="card-title">Edit Profile</h4>
+            </div>
+          </div>
+          <div class="card-body ">
+            <div class="card-body form-type-round">
+              <div class="row">
+                <div class="col-md-6">
+                  <input placeholder="First Name" type="text" [(ngModel)]="driver.firstName" class="form-control" />
+                </div>
+                <div class="col-md-6">
+                  <input placeholder="Last Name" type="text"  [(ngModel)]="driver.lastName"  class="form-control" />
+                </div>
+                <div class="col-md-6">
+                  <input placeholder="Email" type="text" [(ngModel)]="driver.email" class="form-control" />
+                </div>
+                <div class="col-md-6">
+                  <input placeholder="Profile Name" type="text" [(ngModel)]="driver.profileName" class="form-control" />
+                </div>
+                <div class="col-md-6">
+                  <input placeholder="City" type="text" [(ngModel)]="driver.city" class="form-control" />
+                </div>
+                <div class="col-md-6">
+                  <input placeholder="Address" type="text" [(ngModel)]="driver.address" class="form-control" />
+                </div>
+                <div class="col-md-6">
+                    <mat-form-field>
+                        <mat-label>Date of Birth</mat-label>
+                        <input  matInput [matDatepicker]="myPicker" [(ngModel)]="driver.dob"  placeholder="date">
+                        <mat-datepicker-toggle  matSuffix [for]="myPicker"></mat-datepicker-toggle>
+                        <mat-datepicker #myPicker></mat-datepicker>
+                    </mat-form-field>
+                  <!-- <input placeholder="Date of Birth" [(ngModel)]="driver.dob" type="date" class="form-control" style="width: 430px;" /> -->
+                </div>
+
+
+                <div class="col-md-7 pull-right" style="padding-top: 30px;">
+                  <button (click)="editProfile()" class="btn btn-w-md btn-round btn-primary" style="float:right">
+                    save</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> 

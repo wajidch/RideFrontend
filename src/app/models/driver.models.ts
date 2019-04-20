@@ -10,5 +10,5 @@ export class DriverModel{
      address: string;
      dob: Date;
      status: string;
-     rides:RideModel[];
+     carId: string;
 }

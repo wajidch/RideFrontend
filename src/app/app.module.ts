@@ -44,7 +44,6 @@ import {
   MatStepperModule,
 } from '@angular/material';
 
-
 import { AppComponent } from './app.component';
 
 import { SidebarModule } from './RIDE-MANAGMENT/sidebar/sidebar.module';

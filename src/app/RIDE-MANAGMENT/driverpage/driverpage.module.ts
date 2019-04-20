@@ -9,7 +9,7 @@ import { MaterialModule } from '../../app.module';
 import { driverpageRoutes } from './driverpage.routing';
 import { creaeterideComponent } from './creaeteride/creaeteride.component';
 import { driverComponent } from './driver/driver.component';
-
+import { ProfileComponent } from './driver/profile.component';
 
 @NgModule({
   imports: [
@@ -23,7 +23,8 @@ import { driverComponent } from './driver/driver.component';
   ],
   declarations: [
     creaeterideComponent,
-    driverComponent
+    driverComponent,
+    ProfileComponent
   ]
 })
 
