@@ -11,11 +11,14 @@ import { DriverModel } from 'app/models/driver.models';
 
 export class driverComponent implements OnInit {
 
+    today: number = Date.now();
     car: any;
     myLastRides: RideModel[] = [];
     driver: DriverModel;
+    moneyEarned: number = 0;
     constructor(private appServiceManager: AppServiceManager) { }
     ngOnInit(): void {
+        
         this.driver = new DriverModel();
         this.car = JSON.parse(localStorage.getItem("car"));
         this.getDriver(this.car);
@@ -29,6 +32,9 @@ export class driverComponent implements OnInit {
     getLastRides() {
         this.appServiceManager.get('drivers/mylastrides/' + this.car._id).subscribe((mylastrides) => {
             this.myLastRides = mylastrides;
+            this.myLastRides.forEach(ride=>{
+                this.moneyEarned = this.moneyEarned + ride.amount;
+            });
         });
     }
 

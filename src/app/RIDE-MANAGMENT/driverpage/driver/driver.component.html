@@ -1,44 +1,45 @@
 <div class="main-content">
-        <div class="container-fluid">
-          <div class="row">
-            <div class="col-md-5">
-              <div class="card ">
-                <div class="card-header card-header-rose card-header-icon">
-                        <div class="card-text">
-                                <h4 class="card-title">Current Online Driver</h4>
-                                </div>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-5">
+        <div class="card ">
+          <div class="card-header card-header-rose card-header-icon">
+            <div class="card-text">
+              <h4 class="card-title">Current Online Driver</h4>
+            </div>
+          </div>
+          <div class="card-body ">
+            <form class="card">
+              <h4 class="card-title fw-400"></h4>
+
+              <div class="card-body">
+                <div class="flexbox gap-items-4">
+                  <div class="flex-grow">
+                    <h5>My Status</h5>
+                    <div class="d-flex flex-column flex-sm-row gap-items-2 gap-y mt-16">
+                      <div class="file-group file-group-inline">
+                        <button class="btn btn-sm btn-w-lg btn-outline  btn-round btn-screen" type="button">On a
+                          ride</button>
+                      </div>
+
+                      <a class="btn btn-sm btn-w-lg btn-outline btn-round btn-screen" [routerLink]="">Ready for Ride</a>
+                    </div>
+                  </div>
                 </div>
-                <div class="card-body ">
-                        <form class="card">
-                                <h4 class="card-title fw-400"></h4>
-                          
-                                <div class="card-body">
-                                  <div class="flexbox gap-items-4">
-                                    <div class="flex-grow">
-                                      <h5>My Status</h5>
-                                      <div class="d-flex flex-column flex-sm-row gap-items-2 gap-y mt-16">
-                                        <div class="file-group file-group-inline">
-                                          <button  class="btn btn-sm btn-w-lg btn-outline  btn-round btn-screen" type="button">On a ride</button>
-                                        </div>
-                          
-                                        <a class="btn btn-sm btn-w-lg btn-outline btn-round btn-screen" [routerLink]="">Ready for Ride</a>
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <hr>
-                                </div>
-                                <div class="media col-md-12" style="margin-top:30px">
-                                    <div class="media-body">
-                                      <p><strong>{{driver.firstName}}  {{driver.lastName}}</strong></p>
-                                    </div>
-                          
-                                    <span class="badge" [ngClass]="{'badge-success':driver.status == 'online',
+                <hr>
+              </div>
+              <div class="media col-md-12" style="margin-top:30px">
+                <div class="media-body">
+                  <p><strong>{{driver.firstName}} {{driver.lastName}}</strong></p>
+                </div>
+
+                <span class="badge" [ngClass]="{'badge-success':driver.status == 'online',
                                     'badge-warning':driver.status == 'offline',
                                     'badge-danger':driver.status=='onride'}">{{driver.status}}
-                                  </span>  
-                                     <hr>
-                                  </div>
-<!--                                 
+                </span>
+                <hr>
+              </div>
+              <!--                                 
                                   <div class="media">
                                       <div class="media-body">
                                         <p><strong>Maryam Amiri</strong></p>
@@ -46,45 +47,45 @@
                                       <span class="badge badge-danger">Start Ride</span>    
                                        <hr>
                                     </div> -->
-                              </form>
-                </div>
-             </div>
-         </div>
+            </form>
+          </div>
+        </div>
+      </div>
 
-         <div class="col-md-7">
-                <div class="card ">
-                  <div class="card-header card-header-rose card-header-icon">
-                        <div class="card-text">
-                    <h4 class="card-title">My Last Rides</h4>
-                    </div>
-                  </div>
-                  <div class="card-body ">
+      <div class="col-md-7">
+        <div class="card ">
+          <div class="card-header card-header-rose card-header-icon">
+            <div class="card-text">
+              <h4 class="card-title">My Last Rides</h4>
+            </div>
+          </div>
+          <div class="card-body ">
 
-                        <table class="table table-striped">
-                                <thead>
-                                  <tr>
-                                    <th>#</th>
-                                    <th>Customer Name</th>
-                                    <th>From / Destination Place</th>
-                                    <th>From Time</th>
-                                    <th>End Time</th>
-                                  </tr>
-                                </thead>
-                                <tbody>
-                                  <tr *ngFor = "let ride of myLastRides; let i=index;" >
-                                    <td> {{i+1}} </td>
-                                    <td>{{ride.customer}}</td>
-                                    <td>{{ride.startPoint}} / {{ride.endPoint}}</td>
-                                    <td>{{ride.startTime}}</td>
-                                    <td>{{ride.endTime}}</td>
-                                  </tr>
-                                </tbody>
-                              </table>
-                  </div>
-               </div>
-           </div>
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Customer Name</th>
+                  <th>From / Destination Place</th>
+                  <th>From Time</th>
+                  <th>End Time</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let ride of myLastRides; let i=index;">
+                  <td> {{i+1}} </td>
+                  <td>{{ride.customer}}</td>
+                  <td>{{ride.startPoint}} / {{ride.endPoint}}</td>
+                  <td>{{ride.startTime}}</td>
+                  <td>{{ride.endTime}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
 
-           <!-- <div class="col-md-8">
+      <!-- <div class="col-md-8">
                 <div class="card ">
                   <div class="card-header card-header-rose card-header-icon">
                         <div class="card-text">
@@ -131,25 +132,28 @@
                </div>
            </div> -->
 
-           <div class="col-md-4">
-                <div class="card ">
-                  <div class="card-header card-header-rose card-header-icon">
-                        <div class="card-text">
-                                <h4 class="card-title">Detail</h4>
-                                </div>
-                  </div>
-                  <div class="card-body ">
-                        <div class="col-md-12 col-lg-12">
-                                <div class="card card-body text-center py-50">
-                                  <h5 class="mt-3 mb-1"><a class="hover-primary" href="#">Current Time: 2:39</a></h5>
-                                  <h5 class="mt-3 mb-1"><a class="hover-primary" href="#">How much Rides I did Till now:7</a></h5>
-                                  <h5 class="mt-3 mb-1"><a class="hover-primary" href="#">How much money got from the rides: 2000</a></h5>
-                                </div>
-                              </div>
-                  </div>
-               </div>
-           </div>
-     </div>
+      <div class="col-md-8">
+        <div class="card ">
+          <div class="card-header card-header-rose card-header-icon">
+            <div class="card-text">
+              <h4 class="card-title">Detail</h4>
+            </div>
+          </div>
+          <div class="card-body ">
+            <div class="col-md-12 col-lg-12">
+              <div class="card card-body text-center py-50">
+                <h5 class="mt-3 mb-1"><a class="hover-primary" [routerLink]="">Current Time:
+                    {{ today | date:'shortTime' }}</a></h5>
+                <h5 class="mt-3 mb-1"><a class="hover-primary" [routerLink]="">How much Rides I did Till
+                    now:{{myLastRides?myLastRides.length:0}}</a></h5>
+                <h5 class="mt-3 mb-1"><a class="hover-primary" [routerLink]="">
+                  How much money got from the rides:
+                    {{moneyEarned}}</a></h5>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-</div>
-                    
