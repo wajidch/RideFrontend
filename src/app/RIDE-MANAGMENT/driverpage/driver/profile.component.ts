@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import {DriverModel} from 'app/models/driver.models';
 import { FormControl } from '@angular/forms';
 import { AppServiceManager } from 'app/services/appServiceManager'; 
+import { AuthService } from 'app/services/auth/auth.service';
 @Component({
     selector: 'app-profile-cmp',
     templateUrl: 'profile.component.html'
@@ -15,11 +16,11 @@ export class ProfileComponent implements OnInit {
     car:any;
     message: String = '';
     dialogTitle: String= '';
-    constructor(private appServiceManager: AppServiceManager){}
+    constructor(private appServiceManager: AppServiceManager,private auth: AuthService){}
 
     ngOnInit(): void {
         this.driver = new DriverModel();
-        this.car = JSON.parse(localStorage.getItem("car"));
+        this.car = JSON.parse(this.auth.getSession("car"));
         this.getDriver(this.car);
     }
 

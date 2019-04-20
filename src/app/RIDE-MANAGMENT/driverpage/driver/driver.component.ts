@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AppServiceManager } from 'app/services/appServiceManager';
 import { RideModel } from 'app/models/ride.models';
 import { DriverModel } from 'app/models/driver.models';
+import { AuthService } from 'app/services/auth/auth.service';
 
 
 @Component({
@@ -16,11 +17,11 @@ export class driverComponent implements OnInit {
     myLastRides: RideModel[] = [];
     driver: DriverModel;
     moneyEarned: number = 0;
-    constructor(private appServiceManager: AppServiceManager) { }
+    constructor(private appServiceManager: AppServiceManager,private auth: AuthService) { }
     ngOnInit(): void {
         
         this.driver = new DriverModel();
-        this.car = JSON.parse(localStorage.getItem("car"));
+        this.car = JSON.parse(this.auth.getSession("car"));
         this.getDriver(this.car);
         this.getLastRides();
     }

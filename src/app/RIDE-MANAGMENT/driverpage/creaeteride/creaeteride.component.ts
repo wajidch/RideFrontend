@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { AppServiceManager } from 'app/services/appServiceManager';
 import { RideModel } from 'app/models/ride.models';
+import {AuthService} from 'app/services/auth/auth.service';
 
 @Component({
     selector: 'app-creaeteride-cmp',
@@ -27,10 +28,10 @@ export class creaeterideComponent implements OnInit {
         { id: "Cash", label: "Cash" },
         { id: "Card", label: "Card" }
     ];
-    constructor(private appServiceManager: AppServiceManager) { };
+    constructor(private appServiceManager: AppServiceManager,private auth: AuthService) { };
 
     ngOnInit() {
-        this.car = JSON.parse(localStorage.getItem("car"));
+        this.car = JSON.parse(this.auth.getSession("car"));
         this.ride = new RideModel();
     }
 

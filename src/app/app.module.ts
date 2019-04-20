@@ -59,6 +59,7 @@ import { ApiService } from './services/api.service';
 import { DataService } from './services/dataService';
 import { AuthService } from './services/auth/auth.service';
 import { AppServiceManager } from './services/appServiceManager';
+import { AuthGuardService } from './services/auth/auth-guard.service';
 @NgModule({
   exports: [
     MatAutocompleteModule,
@@ -125,6 +126,7 @@ export class MaterialModule { }
   providers: [
     ApiService,
     AuthService,
+    AuthGuardService,
     DataService,
     AppServiceManager
   ],

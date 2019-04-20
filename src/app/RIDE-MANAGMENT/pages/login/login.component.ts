@@ -51,7 +51,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         this.appServiceManager.post('cars/login',JSON.stringify(obj)).subscribe((res)=>{
            if(res.status==true){
                console.log(res.car);
-               localStorage.setItem('car',JSON.stringify(res.car));
+               sessionStorage.setItem('car',JSON.stringify(res.car));
             this.router.navigateByUrl('dashboard');
            } else {
                alert(res.error);

@@ -217,4 +217,9 @@ export class NavbarComponent implements OnInit {
     getPath() {
         return this.location.prepareExternalUrl(this.location.path());
     }
+
+    clearStorage(){
+        sessionStorage.clear();
+        this.router.navigateByUrl('/pages/login');
+    }
 }

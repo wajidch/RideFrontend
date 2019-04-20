@@ -27,7 +27,7 @@ export class AuthService {
     this.headers.set('Access-Control-Allow-Methods', 'POST');
     this.headers.set('observe', 'body');
 
-     return this.httpClient.post(this.API_URL + 'login', { "username": username, "password": password }, { responseType: 'text' })
+    return this.httpClient.post(this.API_URL + 'login', { "username": username, "password": password }, { responseType: 'text' })
       .subscribe(
         data => {
           localStorage.setItem('token', data)
@@ -51,8 +51,15 @@ export class AuthService {
     // Check whether the token is expired and return
     // true or false
     //return !this.jwtHelper.isTokenExpired(token);
-    return true;
-  }
+    if (this.getSession("car")) {
+      return true;
+    } else {
+      return false;
+    }
 
+  }
+  getSession(val: string){
+    return sessionStorage.getItem(val);
+}
 
 }

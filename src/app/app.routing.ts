@@ -9,14 +9,15 @@ export const AppRoutes: Routes = [
     path: '',
     redirectTo: 'dashboard',
     pathMatch: 'full',
+    canActivate: [AuthGuardService]
   }, {
     path: '',
     component: AdminLayoutComponent,
+    canActivate: [AuthGuardService],
     children: [
         {
       path: '',
-      loadChildren:'./RIDE-MANAGMENT/dashboard/dashboard.module#DashboardModule',
-      // canActivate: [AuthGuardService] 
+      loadChildren:'./RIDE-MANAGMENT/dashboard/dashboard.module#DashboardModule'
   }, {
       path: 'administrations',
       loadChildren:'./RIDE-MANAGMENT/administrations/administrations.module#AdministrationsModule'
