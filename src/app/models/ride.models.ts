@@ -17,8 +17,11 @@ export class RideModel{
     driver: DriverModel;
     car: CarModel; 
     carId: string;
+    createdOn: Date;
     constructor(){
         this.driver = new DriverModel();
         this.car = new CarModel();
+        // let date = new Date();
+        // this.createdOn = new Date(date.toDateString()); 
     }
 }

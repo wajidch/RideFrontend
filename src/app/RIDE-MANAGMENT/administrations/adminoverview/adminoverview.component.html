@@ -1,36 +1,42 @@
 <div class="main-content">
-    <div class="container-fluid">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-rose card-header-icon">
+            <div class="card-icon">
+              <i class="material-icons">assignment</i>
+            </div>
+            <h4 class="card-title">Admin OverView</h4>
+          </div>
+          <div class="card-body">
             <div class="row">
-                    <div class="col-md-12">
-                        <div class="card">
-                          <div class="card-header card-header-rose card-header-icon">
-                            <div class="card-icon">
-                              <i class="material-icons">assignment</i>
-                            </div>
-                            <h4 class="card-title">Admin OverView</h4>
-                          </div>
-                            <div class="card-body">
-                                <div class="row">
-                                        <div class="col-md-6 col-lg-6">
-                                                <div class="card card-body text-center py-50">
-                                                  <h5 class="mt-3 mb-1"><a class="hover-primary" href="#">Current Driver Registed: 2:39</a></h5>
-                                                  <h5 class="mt-3 mb-1"><a class="hover-primary" href="#">Current Driver Online:7</a></h5>
-                                                  <h5 class="mt-3 mb-1"><a class="hover-primary" href="#">Curent Driver On a Ride: 2000</a></h5>
-                                                </div>
-                                              </div>
-                                    
-                                              <div class="col-md-6 col-lg-6">
-                                                  <div class="card card-body text-center py-50">
-                                                    <h5 class="mt-3 mb-1"><a class="hover-primary" href="#">Rides Did Today: 2:39</a></h5>
-                                                    <h5 class="mt-3 mb-1"><a class="hover-primary" href="#">Rides Did Yesterday:7</a></h5>
-                                                    <h5 class="mt-3 mb-1"><a class="hover-primary" href="#">Rides Did in Total: 2000</a></h5>
-                                                  </div>
-                                                </div>
-                                </div>
-                                   
-                                </div>
-                            </div>
-                             </div>
-                             </div>
+              <div class="col-md-6 col-lg-6">
+                <div class="card card-body text-center py-50">
+                  <h5 class="mt-3 mb-1"><a class="hover-primary" [routerLink]="">
+                      Current Driver Registed: {{drivers?drivers.length:0}}</a></h5>
+                  <h5 class="mt-3 mb-1"><a class="hover-primary" [routerLink]="">
+                    Current Driver Online:{{onlineDrivers}}</a></h5>
+                  <h5 class="mt-3 mb-1"><a class="hover-primary" [routerLink]="">
+                    Curent Driver On a Ride: {{onrideDrivers}}</a></h5>
+                </div>
+              </div>
+
+              <div class="col-md-6 col-lg-6">
+                <div class="card card-body text-center py-50">
+                  <h5 class="mt-3 mb-1"><a class="hover-primary" [routerLink]="">
+                    Rides Did Today: {{todayRides}}</a></h5>
+                  <h5 class="mt-3 mb-1"><a class="hover-primary" [routerLink]="">
+                    Rides Did Yesterday:{{yesterdayRides}}</a></h5>
+                  <h5 class="mt-3 mb-1"><a class="hover-primary" [routerLink]="">
+                    Rides Did in Total: {{rides?rides.length:0}}</a></h5>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
 </div>
