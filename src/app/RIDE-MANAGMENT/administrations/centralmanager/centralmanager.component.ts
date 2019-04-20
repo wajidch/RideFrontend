@@ -19,7 +19,8 @@ export class centralmanagerComponent implements OnInit {
 
     @ViewChild('btnModalcreatePlannedRide') btnModalcreatePlannedRide: ElementRef;
     @ViewChild('btnModalcreatePlannedShift') btnModalcreatePlannedShift: ElementRef;
-    
+    @ViewChild('btnModalSendRide') btnModalSendRide: ElementRef;
+
     //All drivers and rides
     rides: RideModel[] = [];
     drivers: DriverModel[] = [];
@@ -36,12 +37,12 @@ export class centralmanagerComponent implements OnInit {
 
     driverControl = new FormControl();
     filteredDrivers: Observable<DriverModel[]>;
-
+    selectedRide: RideModel;
 
     constructor(private appServiceManager: AppServiceManager) { }
     ngOnInit() {
         this.ride = new RideModel();
-      
+        this.selectedRide = new RideModel();
         this.getAllDrivers();
         this.getAllRides();
         this.getTodayPlannedRides();
@@ -75,6 +76,7 @@ export class centralmanagerComponent implements OnInit {
         this.appServiceManager.post('rides/todayPlannedRides', postData).subscribe(res => {
             this.btnModalcreatePlannedRide.nativeElement.click();
             this.getTodayPlannedRides();
+            
         });
     }
 
@@ -111,22 +113,40 @@ export class centralmanagerComponent implements OnInit {
         });
     }
 
-    createTodayPlanShift() { 
+    createTodayPlanShift() {
         let obj = {
-            car : this.myControl.value,
-            driver : this.driverControl.value
+            car: this.myControl.value,
+            driver: this.driverControl.value
         }
         var postData = JSON.stringify(obj);
         this.appServiceManager.post('rides/todayPlannedShifts', postData).subscribe(res => {
             this.btnModalcreatePlannedShift.nativeElement.click();
             this.getTodayPlannedShifts();
+            
         });
     }
 
     getTodayPlannedShifts() {
         this.appServiceManager.get('rides/todayPlannedShifts').subscribe(res => {
             this.todayPlannedShifts = res;
-            console.log(this.todayPlannedShifts );
+            console.log(this.todayPlannedShifts);
+        });
+    }
+
+    onSendRideDialog(ride: RideModel) {
+        this.selectedRide = ride;
+    }
+
+    sendRide() {
+        let obj = {
+            driverCarId:this.driverControl.value.carId,
+            rideId: this.selectedRide._id
+        }
+        var postData = JSON.stringify(obj);
+        this.appServiceManager.put('rides/sendRide', postData).subscribe(res => {
+            this.btnModalSendRide.nativeElement.click();
+            this.getAllRides();
+            
         });
     }
 }
