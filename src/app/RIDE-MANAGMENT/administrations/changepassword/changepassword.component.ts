@@ -1,17 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { CarModel } from 'app/models/car.models';
 import { AppServiceManager } from 'app/services/appServiceManager';
-
+import { MessageDialogComponent } from 'app/components/message-dialog';
 
 @Component({
     selector: 'app-changepassword-cmp',
     templateUrl: 'changepassword.component.html'
 })
 
-export class changepasswordComponent {
+export class changepasswordComponent implements OnInit {
+
+    @ViewChild("btnMsgOpen") btnMsgOpen: ElementRef;
+    message: String = '';
+    dialogTitle: String = '';
+
     myControl = new FormControl();
     cars: CarModel[] = [];
     car: CarModel;
@@ -49,8 +54,9 @@ export class changepasswordComponent {
         this.car.carNumber = this.myControl.value.carNumber;
         var postData = JSON.stringify(this.car);
         this.appServiceManager.put('cars/' + this.car._id, postData).subscribe(res => {
-            console.log("ress", res);
-            alert("Password updated");
+            this.message = "Password is Successfully Updated";
+            this.dialogTitle = "Success Message";
+            this.btnMsgOpen.nativeElement.click();
         })
     }
 

@@ -178,7 +178,7 @@
 
               <div class="row">
                 <div class="col-md-11 pull-right" style="padding-right:40px">
-                  <button class="btn btn-w-md btn-round btn-warning" style="float:right">Export Excel</button>
+                  <!-- <button class="btn btn-w-md btn-round btn-warning" style="float:right">Export Excel</button> -->
                 </div>
 
                 <div class="col-md-1 pull-right">
@@ -193,3 +193,6 @@
     </div>
   </div>
 </div>
+
+<input type="button" hidden #btnMsgOpen data-toggle="modal" data-target="#modal-message" />
+<app-message-dialog [message]="message" [dialogTitle]="dialogTitle" ></app-message-dialog>

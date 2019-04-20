@@ -53,14 +53,12 @@ import { FixedpluginModule } from './RIDE-MANAGMENT/shared/fixedplugin/fixedplug
 import { AdminLayoutComponent } from './RIDE-MANAGMENT/layouts/admin/admin-layout.component';
 import { AuthLayoutComponent } from './RIDE-MANAGMENT/layouts/auth/auth-layout.component';
 
-
 import { AppRoutes } from './app.routing';
 import { HttpClientModule } from '@angular/common/http';
 import { ApiService } from './services/api.service';
 import { DataService } from './services/dataService';
 import { AuthService } from './services/auth/auth.service';
 import { AppServiceManager } from './services/appServiceManager';
-
 @NgModule({
   exports: [
     MatAutocompleteModule,
@@ -122,7 +120,7 @@ export class MaterialModule { }
   declarations: [
     AppComponent,
     AdminLayoutComponent,
-    AuthLayoutComponent,
+    AuthLayoutComponent
   ],
   providers: [
     ApiService,

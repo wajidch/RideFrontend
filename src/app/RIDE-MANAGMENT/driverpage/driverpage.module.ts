@@ -10,7 +10,7 @@ import { driverpageRoutes } from './driverpage.routing';
 import { creaeterideComponent } from './creaeteride/creaeteride.component';
 import { driverComponent } from './driver/driver.component';
 import { ProfileComponent } from './driver/profile.component';
-
+import { MessageDialogModule } from 'app/components/message.module';
 @NgModule({
   imports: [
     CommonModule,
@@ -19,12 +19,13 @@ import { ProfileComponent } from './driver/profile.component';
     ReactiveFormsModule,
     NouisliderModule,
     TagInputModule,
-    MaterialModule
+    MaterialModule,
+    MessageDialogModule
   ],
   declarations: [
     creaeterideComponent,
     driverComponent,
-    ProfileComponent
+    ProfileComponent 
   ]
 })
 

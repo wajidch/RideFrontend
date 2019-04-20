@@ -15,7 +15,7 @@
                   <input placeholder="First Name" type="text" [(ngModel)]="driver.firstName" class="form-control" />
                 </div>
                 <div class="col-md-6">
-                  <input placeholder="Last Name" type="text"  [(ngModel)]="driver.lastName"  class="form-control" />
+                  <input placeholder="Last Name" type="text" [(ngModel)]="driver.lastName" class="form-control" />
                 </div>
                 <div class="col-md-6">
                   <input placeholder="Email" type="text" [(ngModel)]="driver.email" class="form-control" />
@@ -30,12 +30,12 @@
                   <input placeholder="Address" type="text" [(ngModel)]="driver.address" class="form-control" />
                 </div>
                 <div class="col-md-6">
-                    <mat-form-field>
-                        <mat-label>Date of Birth</mat-label>
-                        <input  matInput [matDatepicker]="myPicker" [(ngModel)]="driver.dob"  placeholder="date">
-                        <mat-datepicker-toggle  matSuffix [for]="myPicker"></mat-datepicker-toggle>
-                        <mat-datepicker #myPicker></mat-datepicker>
-                    </mat-form-field>
+                  <mat-form-field>
+                    <mat-label>Date of Birth</mat-label>
+                    <input matInput [matDatepicker]="myPicker" [(ngModel)]="driver.dob" placeholder="date">
+                    <mat-datepicker-toggle matSuffix [for]="myPicker"></mat-datepicker-toggle>
+                    <mat-datepicker #myPicker></mat-datepicker>
+                  </mat-form-field>
                   <!-- <input placeholder="Date of Birth" [(ngModel)]="driver.dob" type="date" class="form-control" style="width: 430px;" /> -->
                 </div>
 
@@ -51,4 +51,7 @@
       </div>
     </div>
   </div>
-</div> 
+</div>
+<input type="button" hidden #btnMsgOpen data-toggle="modal" data-target="#modal-message" />
+<app-message-dialog [message]="message" [dialogTitle]="dialogTitle" ></app-message-dialog>
+ 

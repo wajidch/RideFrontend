@@ -12,20 +12,23 @@ import { centralmanagerComponent } from './centralmanager/centralmanager.compone
 import { changepasswordComponent } from './changepassword/changepassword.component';
 import { adminoverviewComponent } from './adminoverview/adminoverview.component';
 
+import { MessageDialogModule } from 'app/components/message.module';
 @NgModule({
   imports: [
     CommonModule,
     RouterModule.forChild(administrationsRoutes),
     FormsModule,
     ReactiveFormsModule,
-    MaterialModule
+    MaterialModule,
+    MessageDialogModule
   ],
   declarations: [
     registercarComponent,
     allridesComponent,
     centralmanagerComponent,
     changepasswordComponent,
-    adminoverviewComponent,
+    adminoverviewComponent
+
   ]
 })
 
