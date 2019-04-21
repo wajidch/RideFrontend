@@ -21,7 +21,7 @@ export class RideModel{
     constructor(){
         this.driver = new DriverModel();
         this.car = new CarModel();
-        // let date = new Date();
-        // this.createdOn = new Date(date.toDateString()); 
+        let date = new Date();
+        this.createdOn = new Date(date.toLocaleDateString()); 
     }
 }

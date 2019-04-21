@@ -60,6 +60,7 @@ import { DataService } from './services/dataService';
 import { AuthService } from './services/auth/auth.service';
 import { AppServiceManager } from './services/appServiceManager';
 import { AuthGuardService } from './services/auth/auth-guard.service';
+import { ExcelService } from './services/excel.service';
 @NgModule({
   exports: [
     MatAutocompleteModule,
@@ -128,7 +129,8 @@ export class MaterialModule { }
     AuthService,
     AuthGuardService,
     DataService,
-    AppServiceManager
+    AppServiceManager,
+    ExcelService
   ],
   bootstrap: [AppComponent]
 })
