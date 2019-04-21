@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { AppServiceManager } from 'app/services/appServiceManager';
 import { RideModel } from 'app/models/ride.models';
 import { ExcelService } from 'app/services/excel.service';
@@ -10,6 +10,10 @@ import { ExcelService } from 'app/services/excel.service';
 
 export class allridesComponent implements OnInit {
 
+    @ViewChild("btnMsgOpen") btnMsgOpen: ElementRef;
+    message: String = '';
+    dialogTitle: String = '';
+    
     rides: RideModel[] = [];
 
     todayDate = new Date();
@@ -44,7 +48,9 @@ export class allridesComponent implements OnInit {
         if (this.ridesToExport.length > 0) {
             this.excelService.exportAsExcelFile(this.ridesToExport, 'MonthRides');
         } else {
-            alert("No Rides for this month")
+            this.message = "No Rides for this month";
+            this.dialogTitle = "Error Message";
+            this.btnMsgOpen.nativeElement.click();
         }
     }
     exportAsXLSXOfWeek(): void {
@@ -58,7 +64,9 @@ export class allridesComponent implements OnInit {
         if (this.ridesToExport.length > 0) {
             this.excelService.exportAsExcelFile(this.ridesToExport, 'WeekRides');
         } else {
-            alert("No Rides for this week")
+            this.message = "No Rides for this week";
+            this.dialogTitle = "Error Message";
+            this.btnMsgOpen.nativeElement.click();
         }
        
     }
@@ -74,7 +82,9 @@ export class allridesComponent implements OnInit {
         if (this.ridesToExport.length > 0) {
             this.excelService.exportAsExcelFile(this.ridesToExport, 'TodayRides');
         } else {
-            alert("No Rides for today")
+            this.message = "No Rides for today";
+            this.dialogTitle = "Error Message";
+            this.btnMsgOpen.nativeElement.click();
         }
        
     }

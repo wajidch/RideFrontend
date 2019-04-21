@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { AppServiceManager } from 'app/services/appServiceManager';
 import { RideModel } from 'app/models/ride.models';
 import {AuthService} from 'app/services/auth/auth.service';
+import { ExcelService } from 'app/services/excel.service';
 
 @Component({
     selector: 'app-creaeteride-cmp',
@@ -28,7 +29,8 @@ export class creaeterideComponent implements OnInit {
         { id: "Cash", label: "Cash" },
         { id: "Card", label: "Card" }
     ];
-    constructor(private appServiceManager: AppServiceManager,private auth: AuthService) { };
+    constructor(private appServiceManager: AppServiceManager,private auth: AuthService
+        ,private excelService: ExcelService) { };
 
     ngOnInit() {
         this.car = JSON.parse(this.auth.getSession("car"));
@@ -43,5 +45,35 @@ export class creaeterideComponent implements OnInit {
             this.dialogTitle = "Success Message";
             this.btnMsgOpen.nativeElement.click();
         });
+    }
+    exportAsXLSX(): void {
+        let ridesToExport = [];
+         let obj = this.getObj(this.ride);
+        if (obj != null && obj.from != null) {
+            ridesToExport.push(obj);
+            this.excelService.exportAsExcelFile(ridesToExport, 'NewRide');
+        } else {
+            this.message = "Fill the form first";
+            this.dialogTitle = "Error Message";
+            this.btnMsgOpen.nativeElement.click();
+        }
+       
+    }
+
+    getObj(obj: any){
+        let rideDate = new Date().toLocaleDateString();
+        let ride = {
+            createdOn : rideDate,
+            from :  obj.startPoint,
+            destination : obj.endPoint,
+            startTime :  obj.startTime,
+            endTime :  obj.endTime,
+            passengers :  obj.totalPassengers,
+            paymentMethod :  obj.paymentMethod,
+            amount :  obj.amount,
+            customer: obj.customer
+        };
+     
+        return ride;
     }
 }
