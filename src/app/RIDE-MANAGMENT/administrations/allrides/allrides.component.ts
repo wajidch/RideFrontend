@@ -9,7 +9,7 @@ import { ExcelService } from 'app/services/excel.service';
 })
 
 export class allridesComponent implements OnInit {
-
+    @ViewChild("btnModalDeleteClose") btnModalDeleteClose: ElementRef;
     @ViewChild("btnMsgOpen") btnMsgOpen: ElementRef;
     message: String = '';
     dialogTitle: String = '';
@@ -21,9 +21,11 @@ export class allridesComponent implements OnInit {
     prevMonth = new Date();
 
     ridesToExport: any[] = [];
+    ride: RideModel;
 
     constructor(private appServiceManager: AppServiceManager, private excelService: ExcelService) { };
     ngOnInit() {
+        this.ride = new RideModel();
         let date = new Date();
         this.prevWeek.setDate(date.getDate() - 7);
         this.prevMonth.setDate(date.getDate() - 28);
@@ -104,4 +106,17 @@ export class allridesComponent implements OnInit {
      
         return ride;
     }
+
+    confirmDelete(rideId){
+        this.ride._id = rideId;
+    }
+
+    deleteRide(){
+        this.appServiceManager.detele('rides/'+ this.ride._id).subscribe(res => {
+            console.log("ress", res);
+            this.btnModalDeleteClose.nativeElement.click();
+            this.getAll();
+        });
+    }
 }
+

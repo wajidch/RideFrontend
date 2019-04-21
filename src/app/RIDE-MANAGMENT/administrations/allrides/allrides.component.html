@@ -39,6 +39,7 @@
                     <th>From / Destination Place</th>
                     <th>From Time</th>
                     <th>End Time</th>
+                    <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -48,6 +49,13 @@
                     <td>{{ride.startPoint}} / {{ride.endPoint}}</td>
                     <td>{{ride.startTime}}</td>
                     <td>{{ride.endTime}}</td>
+                    <td class="td-actions text-right">
+                       
+                      <button mat-raised-button type="button" (click)="confirmDelete(ride._id)" data-toggle="modal"
+                        data-target="#modal-delete" class="btn btn-danger btn-link">
+                        <i class="material-icons">close</i>
+                      </button>
+                    </td>
                   </tr>
 
 
@@ -65,3 +73,25 @@
 
 <input type="button" hidden #btnMsgOpen data-toggle="modal" data-target="#modal-message" />
 <app-message-dialog [message]="message" [dialogTitle]="dialogTitle" ></app-message-dialog>
+
+<div class="modal fade" id="modal-delete" tabindex="-1" aria-hidden="true" style="display: none;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="myModalLabel">Delete Ride</h4>
+        <button #btnModalDeleteClose type="button" class="close" data-dismiss="modal">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row form-type-round">
+          Are you sure you want to delete this Ride?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-bold btn-pure btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-bold btn-pure btn-primary" (click)="deleteRide()">Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
