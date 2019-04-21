@@ -8,7 +8,7 @@ export class DriverModel{
      profileName: string;
      city: string;
      address: string;
-     dob: Date;
+     dob: string;
      status: string;
-     carId: string;
+     carId: string; 
 }

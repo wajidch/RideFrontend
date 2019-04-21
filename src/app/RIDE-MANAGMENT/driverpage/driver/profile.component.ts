@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import {DriverModel} from 'app/models/driver.models';
-import { FormControl } from '@angular/forms';
 import { AppServiceManager } from 'app/services/appServiceManager'; 
 import { AuthService } from 'app/services/auth/auth.service';
+import { DatePipe } from '@angular/common';
 @Component({
     selector: 'app-profile-cmp',
     templateUrl: 'profile.component.html'
@@ -12,11 +12,11 @@ export class ProfileComponent implements OnInit {
     @ViewChild("btnMsgOpen")btnMsgOpen: ElementRef;
    // @ViewChild("btnMsgClose")btnMsgClose: ElementRef;
     driver: DriverModel;
-    date  =  new  FormControl(new  Date());
     car:any;
     message: String = '';
     dialogTitle: String= '';
-    constructor(private appServiceManager: AppServiceManager,private auth: AuthService){}
+    constructor(private appServiceManager: AppServiceManager,private auth: AuthService
+        ,private datePipe: DatePipe){}
 
     ngOnInit(): void {
         this.driver = new DriverModel();
@@ -26,7 +26,8 @@ export class ProfileComponent implements OnInit {
 
     getDriver(car) {
         this.appServiceManager.get('drivers/'+car._id).subscribe(res => {
-          this.driver = res;
+          this.driver = res; 
+          this.driver.dob = this.transformDate(this.driver.dob); 
         });
     }
     editProfile() { 
@@ -40,5 +41,8 @@ export class ProfileComponent implements OnInit {
           // },3000);
         });
     }
+    transformDate(date) {
+       return this.datePipe.transform(date, 'yyyy-MM-dd'); //whatever format you need. 
+      }
     
 }

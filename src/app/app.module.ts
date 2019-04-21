@@ -2,7 +2,7 @@ import { NgModule, ElementRef } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { HttpModule } from '@angular/http';
-import { APP_BASE_HREF } from '@angular/common';
+import { APP_BASE_HREF, DatePipe } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
@@ -130,7 +130,8 @@ export class MaterialModule { }
     AuthGuardService,
     DataService,
     AppServiceManager,
-    ExcelService
+    ExcelService,
+    DatePipe
   ],
   bootstrap: [AppComponent]
 })
