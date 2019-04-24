@@ -40,6 +40,8 @@ export const ROUTES: RouteInfo[] = [{
         { path: 'centralmanager', title: 'Central Manager', ab: 'CM' },
         { path: 'changepassword', title: 'Change Password', ab: 'CP' },
         { path: 'adminoverview', title: 'adminoverview', ab: 'AO' },
+        { path: 'users', title: 'Manage Users', ab: 'AO' },
+        { path: 'roles', title: 'Manage Roles', ab: 'AO' },
     ]
 },
 {
