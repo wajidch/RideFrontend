@@ -23,6 +23,7 @@ export class UserComponent implements OnInit {
     ngOnInit() {
         this.user = new UserModel(); 
         this.getUsers();
+        this.getRoles();
     }
 
     getUsers() { 

@@ -12,6 +12,7 @@ export class UserModel {
     status: string;
     carId: string; 
     role: RoleModel;
+    password: string;
     
     constructor(){
         this.role = new RoleModel();

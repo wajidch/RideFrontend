@@ -67,30 +67,42 @@
                 <form>
                     <div class="modal-body">
                         <div class="row form-type-round">
-
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="name">First Name</label>
-                                    <input [(ngModel)]="user.firstName" name="firstName" type="text" class="form-control" id="name">
-                                </div>
-                            </div>
-
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="lastName">User Name</label>
-                                    <input [(ngModel)]="user.lastName" name="lastName" type="text" class="form-control" id="lastName">
-                                </div>
-                            </div>
-
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="rol">role</label>
-                                    <select [(ngModel)]="user.role" id="rol"  name="role" >
-                                        <option *ngFor="let role of roles" [value]="role._id">{{role.name}}</option>
-                                    </select>
-                                </div>
-                            </div>
-
+                                <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="name1">First Name</label>
+                                            <input [(ngModel)]="user.firstName" name="firstName11" type="text" class="form-control" id="name1">
+                                        </div>
+                                    </div>
+        
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="lastName1">Last Name</label>
+                                            <input [(ngModel)]="user.lastName" name="lastName11" type="text" class="form-control" id="lastName1">
+                                        </div>
+                                    </div>
+    
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="email1">Email</label>
+                                            <input [(ngModel)]="user.email" name="email1" type="email" class="form-control" id="email1">
+                                        </div>
+                                    </div>
+    
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="password">Password</label>
+                                            <input [(ngModel)]="user.password" name="password1" type="password" class="form-control" id="password1">
+                                        </div>
+                                    </div>
+        
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="rol1">Assign Role</label>
+                                            <select [(ngModel)]="user.role.name" id="rol1" name="role11" class="form-control">
+                                                <option *ngFor="let role of roles" [value]="role.name">{{role.name}}</option>
+                                            </select>
+                                        </div>
+                                    </div>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -124,16 +136,30 @@
     
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="lastName">User Name</label>
+                                        <label for="lastName">Last Name</label>
                                         <input [(ngModel)]="user.lastName" name="lastName1" type="text" class="form-control" id="lastName">
                                     </div>
                                 </div>
-    
+
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="rol">role</label>
-                                        <select [(ngModel)]="user.role" id="rol" name="role1" >
-                                            <option *ngFor="let role of roles" [value]="role._id">{{role.name}}</option>
+                                        <label for="email">Email</label>
+                                        <input [(ngModel)]="user.email" name="email" type="email" class="form-control" id="email">
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="password">Password</label>
+                                        <input [(ngModel)]="user.password" name="password" type="password" class="form-control" id="password">
+                                    </div>
+                                </div>
+    
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="rol">Assign Role</label>
+                                        <select [(ngModel)]="user.role.name" id="rol" name="role1" class="form-control">
+                                            <option *ngFor="let role of roles" [value]="role.name">{{role.name}}</option>
                                         </select>
                                     </div>
                                 </div>
@@ -147,8 +173,7 @@
                 </div>
             </div>
         </div>
-    </div>
-
+    </div> 
     <div class="modal fade" id="modal-delete" tabindex="-1" aria-hidden="true" style="display: none;">
         <div class="modal-dialog">
             <div class="modal-content">
