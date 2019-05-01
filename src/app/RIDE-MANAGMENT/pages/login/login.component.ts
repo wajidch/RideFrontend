@@ -4,9 +4,11 @@ import { ApiService } from 'app/services/api.service';
 import { AuthService } from 'app/services/auth/auth.service';
 import { Response } from '@angular/http';
 import { HttpResponse } from '@angular/common/http';
-import { map } from 'rxjs/operators';
+import { map, startWith } from 'rxjs/operators';
 import {AppServiceManager} from 'app/services/appServiceManager';
-
+import { CarModel } from 'app/models/car.models';
+import { Observable } from 'rxjs';
+import { FormControl } from '@angular/forms';
 declare var $: any;
 
 @Component({
@@ -15,8 +17,10 @@ declare var $: any;
 })
 
 export class LoginComponent implements OnInit, OnDestroy {
-
-     carNumber: string;
+    filteredCars: Observable<CarModel[]>;
+    myControl = new FormControl();
+    cars: CarModel[] = [];
+    //carNumber: string;
      password: string;
 
     test: Date = new Date();
@@ -41,11 +45,32 @@ export class LoginComponent implements OnInit, OnDestroy {
             // after 1000 ms we add the class animated to the login/register card
             card.classList.remove('card-hidden');
         }, 700);
+
+        this.appServiceManager.get('cars').subscribe(res => {
+            this.cars = res;
+
+            this.filteredCars = this.myControl.valueChanges
+                .pipe(
+                    startWith<string | CarModel>(''),
+                    map(value => typeof value === 'string' ? value : value.carNumber),
+                    map(carNumber => carNumber ? this._filter(carNumber) : this.cars.slice())
+                );
+        });
+    }
+
+    displayFn(car?: CarModel): string | undefined {
+        return car ? car.carNumber : undefined;
+    }
+
+    private _filter(name: string): CarModel[] {
+        const filterValue = name.toLowerCase();
+
+        return this.cars.filter(car => car.carNumber.toLowerCase().indexOf(filterValue) === 0);
     }
 
     login(){
         var obj = {
-            carNumber: this.carNumber,
+            carNumber: this.myControl.value.carNumber,
             password: this.password
         };
         this.appServiceManager.post('cars/login',JSON.stringify(obj)).subscribe((res)=>{
