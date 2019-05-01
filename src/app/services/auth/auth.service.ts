@@ -51,7 +51,7 @@ export class AuthService {
     // Check whether the token is expired and return
     // true or false
     //return !this.jwtHelper.isTokenExpired(token);
-    if (this.getSession("car")) {
+    if (this.getSession("car") || this.getSession("currentUser")) {
       return true;
     } else {
       return false;

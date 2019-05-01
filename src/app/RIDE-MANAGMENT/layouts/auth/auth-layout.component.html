@@ -23,7 +23,12 @@
         </li> -->
         <li class="nav-item" routerLinkActive="active">
           <a class="nav-link" [routerLink]="['/pages/login']">
-            <i class="material-icons">fingerprint</i> Login
+            <i class="material-icons">fingerprint</i>Driver Login
+          </a>
+        </li>
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link" [routerLink]="['/pages/usersLogin']">
+            <i class="material-icons">fingerprint</i> Admin/Central Manager Login
           </a>
         </li>
         <!-- <li class="nav-item" routerLinkActive="active">
@@ -35,4 +40,4 @@
     </div>
   </div>
 </nav>
-  <router-outlet></router-outlet>
+<router-outlet></router-outlet>
