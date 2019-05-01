@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import PerfectScrollbar from 'perfect-scrollbar';
-
+import { AuthService } from 'app/services/auth/auth.service';
+import { Role } from 'app/utilities/constants';
 declare const $: any;
 
 //Metadata
@@ -64,17 +65,34 @@ export const ROUTES: RouteInfo[] = [{
 
 export class SidebarComponent implements OnInit {
     public menuItems: any[];
-
+    user: any;
     isMobileMenu() {
         if ($(window).width() > 991) {
             return false;
         }
         return true;
     };
+    constructor(public auth: AuthService) { }
 
     ngOnInit() {
+        this.user = JSON.parse(this.auth.getSession("currentUser"));
         this.menuItems = ROUTES.filter(menuItem => menuItem);
-
+        var items = [...this.menuItems];
+        if (this.user.role.name.includes(Role.DRIVER)) {
+            let itemProceeded = 0;
+            this.menuItems.forEach((item, index,array) => {
+                itemProceeded++;
+                if(item.path.includes("/administrations")){
+                    let index = this.menuItems.indexOf(item);
+                    if(index !== -1) {
+                        items.splice(index,1);
+                    }
+                }
+                if(itemProceeded == array.length){
+                    this.menuItems = items;
+                }
+            });
+        }
         var mainPanel = document.getElementsByClassName('main-panel')[0];
         $('.modal').on('shown.bs.modal', function () {
             mainPanel.classList.add('no-scroll');
