@@ -24,8 +24,9 @@ export class ProfileComponent implements OnInit {
         this.user = new UserModel();
         this.car = JSON.parse(this.auth.getSession("car"));
         this.user = JSON.parse(this.auth.getSession("currentUser"));
+        this.user.dob = this.transformDate(this.user.dob); 
         //this.getDriver(this.car);
-        this.getUser(this.user._id);
+        //this.getUser(this.user._id);
     }
 
     // getDriver(car) {
@@ -35,12 +36,12 @@ export class ProfileComponent implements OnInit {
     //     });
     // }
 
-     getUser(userId) {
-        this.appServiceManager.get('users/'+userId).subscribe(res => {
-          this.user = res; 
-          this.user.dob = this.transformDate(this.user.dob); 
-        });
-    }
+    //  getUser(userId) {
+    //     this.appServiceManager.get('users/'+userId).subscribe(res => {
+    //       this.user = res; 
+    //       this.user.dob = this.transformDate(this.user.dob); 
+    //     });
+    // }
     editProfile() {
         var postData = JSON.stringify(this.user);
         this.appServiceManager.put('users/profile/' + this.user._id, postData).subscribe(res => {
@@ -48,6 +49,7 @@ export class ProfileComponent implements OnInit {
             this.message = "Profile is Successfully Updated";
             this.dialogTitle = "Success Message";
             this.btnMsgOpen.nativeElement.click();
+            sessionStorage.setItem('currentUser',JSON.stringify(res));
             // setTimeout(()=>{
             //   this.btnMsgClose.nativeElement.click();
             // },3000);

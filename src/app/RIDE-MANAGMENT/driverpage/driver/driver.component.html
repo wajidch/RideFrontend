@@ -30,12 +30,12 @@
               </div>
               <div class="media col-md-12" style="margin-top:30px">
                 <div class="media-body">
-                  <p><strong>{{driver.firstName}} {{driver.lastName}}</strong></p>
+                  <p><strong>{{user.firstName}} {{user.lastName}}</strong></p>
                 </div>
 
-                <span class="badge" [ngClass]="{'badge-success':driver.status == 'online',
-                                    'badge-warning':driver.status == 'offline',
-                                    'badge-danger':driver.status=='onride'}">{{driver.status}}
+                <span class="badge" [ngClass]="{'badge-success':user.status == 'online',
+                                    'badge-warning':user.status == 'offline',
+                                    'badge-danger':user.status=='onride'}">{{user.status}}
                 </span>
                 <hr>
               </div>
@@ -78,6 +78,12 @@
                   <td>{{ride.startPoint}} / {{ride.endPoint}}</td>
                   <td>{{ride.startTime}}</td>
                   <td>{{ride.endTime}}</td>
+                  <td class="td-actions text-right">
+                    <button mat-raised-button type="button" (click)="confirmUpdate(ride)" data-toggle="modal"
+                      data-target="#modal-updateride" class="btn btn-success btn-link">
+                      <i class="material-icons">edit</i>
+                    </button> 
+                  </td>
                 </tr>
               </tbody>
             </table>
@@ -153,6 +159,119 @@
             </div>
           </div>
         </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modal-updateride" tabindex="-1" aria-hidden="true" style="display: none;">
+  <div class="modal-dialog">
+    <div style="width:720px;" class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="myModalLabel">Update Ride</h4>
+        <button #btnCloseUpdateride type="button" class="close" data-dismiss="modal">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row form-type-round">
+          <div class="row"> 
+            <div class="col-md-4">
+              <mat-form-field class="example-full-width">
+                <input [(ngModel)]="ride.startPoint" name="startPoint" matInput placeholder="From" type="text">
+              </mat-form-field>
+            </div>
+            <div class="col-md-4">
+              <mat-form-field class="example-full-width">
+                <input [(ngModel)]="ride.endPoint" name="endPoint" matInput placeholder="Destination" type="text">
+              </mat-form-field>
+            </div>
+            <div class="col-md-4">
+              <mat-form-field class="example-full-width">
+                <input type="time" [(ngModel)]="ride.startTime" name="startTime" matInput
+                  placeholder="Start Time">
+              </mat-form-field>
+
+            </div>
+            <div class="col-md-4">
+              <mat-form-field class="example-full-width">
+                <input type="time" [(ngModel)]="ride.endTime" name="endTime" matInput placeholder="End Time">
+              </mat-form-field>
+            </div>
+            <div class="col-md-4">
+              <mat-form-field class="example-full-width">
+                <input type="number" [(ngModel)]="ride.totalPassengers" name="totalPassengers" matInput
+                  placeholder="No. of Passengers">
+              </mat-form-field>
+            </div>
+            <div class="col-md-4">
+              <mat-form-field class="example-full-width">
+                <input type="number" [(ngModel)]="ride.amount" name="amount" matInput placeholder="Amount">
+              </mat-form-field>
+            </div>
+          </div>
+          <!-- <div class="row" style="padding-top:15px">
+
+            <div class="col-md-4">
+              <label style="padding-right: 37px;"><strong>Wheel Chair:</strong></label>
+              <mat-radio-group aria-label="Select an option" [(ngModel)]="ride.wheelChair"
+                class="example-full-width">
+                <mat-radio-button *ngFor="let chair of wheelChairs; let i=index;"
+                  [ngStyle]="{'padding-right': i == 0 ? '12px':''}" [value]="chair.id">{{chair.label}}
+                </mat-radio-button> 
+              </mat-radio-group> 
+            </div> 
+
+            <div class="col-md-6">
+              <label style="padding-right: 10px;"><strong>What Kind of Ride:</strong></label>
+              <mat-radio-group aria-label="Select an option" [(ngModel)]="ride.rideType" class="example-full-width">
+                <mat-radio-button *ngFor="let type of rideTypes; let i=index;" [value]="type.id">{{type.label}}
+                </mat-radio-button>
+              </mat-radio-group>
+            </div> 
+          </div>  -->
+          
+          <div class="row" style="padding-top:15px">
+             <!-- <div class="col-md-4">
+             <label style="padding-right: 10px; padding-top:15px"><strong>Payment Method</strong></label>
+              <mat-radio-group aria-label="Select an option" [(ngModel)]="ride.paymentMethod"
+                class="example-full-width">
+                <mat-radio-button *ngFor="let method of paymentMethods; let i=index;" [value]="method.id">
+                  {{method.label}}</mat-radio-button>
+              </mat-radio-group>
+
+            </div> -->
+            <!-- <div class="col-md-4">
+              <mat-form-field class="example-full-width">
+                <input type="number" [(ngModel)]="ride.amount" name="amount" matInput placeholder="Amount">
+              </mat-form-field>
+            </div> -->
+            <div class="col-md-4">
+              <mat-form-field class="example-full-width">
+                <input type="text" [(ngModel)]="ride.customer" name="customer" matInput placeholder="Customer">
+              </mat-form-field>
+            </div> 
+            <div class="col-md-8">
+              <mat-form-field class="example-full-width">
+                <input type="text" matInput [(ngModel)]="ride.note" name="note" placeholder="Note">
+              </mat-form-field>
+            </div>
+          </div>
+
+          <!-- <div class="row">
+            <div class="col-md-12">
+              <mat-form-field class="example-full-width">
+                <input type="text" matInput [(ngModel)]="ride.note" name="note" placeholder="Note">
+              </mat-form-field>
+            </div>
+          </div> -->
+
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-bold btn-pure btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-bold btn-pure btn-primary" (click)="updateRide()">Save
+          changes</button>
       </div>
     </div>
   </div>

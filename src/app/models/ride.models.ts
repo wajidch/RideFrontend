@@ -17,6 +17,7 @@ export class RideModel{
     driver: DriverModel;
     car: CarModel; 
     carId: string;
+    userId: string;
     createdOn: Date;
     constructor(){
         this.driver = new DriverModel();
