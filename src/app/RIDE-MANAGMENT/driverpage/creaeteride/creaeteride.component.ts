@@ -14,6 +14,7 @@ export class creaeterideComponent implements OnInit {
     @ViewChild("btnMsgOpen") btnMsgOpen: ElementRef;
     ride: RideModel;
     car: any;
+    user: any;
     message: String = '';
     dialogTitle: String = '';
     wheelChairs = [
@@ -34,6 +35,7 @@ export class creaeterideComponent implements OnInit {
 
     ngOnInit() {
         this.car = JSON.parse(this.auth.getSession("car"));
+        this.user = JSON.parse(this.auth.getSession("currentUser"));
         this.ride = new RideModel();
     }
 
