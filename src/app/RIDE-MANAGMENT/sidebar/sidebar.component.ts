@@ -21,42 +21,7 @@ export interface ChildrenItems {
     type?: string;
 }
 
-// Menu Items
-export const ROUTES: RouteInfo[] = [{
-    path: '/dashboard',
-    title: 'Dashboard',
-    type: 'link',
-    icontype: 'dashboard'
-},
 
-{
-    path: '/administrations',
-    title: 'Administration',
-    type: 'sub',
-    icontype: 'apps',
-    collapse: 'administration',
-    children: [
-        { path: 'RegisterCar', title: 'Register Car', ab: 'B' },
-        { path: 'allrides', title: 'allrides', ab: 'P' },
-        { path: 'centralmanager', title: 'Central Manager', ab: 'CM' },
-        { path: 'changepassword', title: 'Change Password', ab: 'CP' },
-        { path: 'adminoverview', title: 'adminoverview', ab: 'AO' },
-        { path: 'users', title: 'Manage Users', ab: 'AO' },
-        { path: 'roles', title: 'Manage Roles', ab: 'AO' },
-    ]
-},
-{
-    path: '/driverpage',
-    title: 'Driver Page',
-    type: 'sub',
-    icontype: 'apps',
-    collapse: 'driverpage',
-    children: [
-        { path: 'createride', title: 'Create Ride', ab: 'CR' },
-        { path: 'driver', title: 'Driver Detail', ab: 'DD' },
-    ]
-},
-];
 
 @Component({
     selector: 'app-sidebar-cmp',
@@ -76,21 +41,75 @@ export class SidebarComponent implements OnInit {
 
     ngOnInit() {
         this.user = JSON.parse(this.auth.getSession("currentUser"));
+        // Menu Items
+        const ROUTES: RouteInfo[] = [{
+            path: '/dashboard',
+            title: 'Dashboard',
+            type: 'link',
+            icontype: 'dashboard'
+        },
+        {
+            path: '/administrations',
+            title: 'Administration',
+            type: 'sub',
+            icontype: 'apps',
+            collapse: 'administration',
+            children: [
+                { path: 'RegisterCar', title: 'Register Car', ab: 'B' },
+                { path: 'allrides', title: 'allrides', ab: 'P' },
+                { path: 'centralmanager', title: 'Central Manager', ab: 'CM' },
+                { path: 'changepassword', title: 'Change Password', ab: 'CP' },
+                { path: 'adminoverview', title: 'adminoverview', ab: 'AO' },
+                { path: 'users', title: 'Manage Users', ab: 'AO' },
+                { path: 'roles', title: 'Manage Roles', ab: 'AO' },
+            ]
+        },
+        {
+            path: '/driverpage',
+            title: 'Driver Page',
+            type: 'sub',
+            icontype: 'apps',
+            collapse: 'driverpage',
+            children: [
+                { path: 'createride', title: 'Create Ride', ab: 'CR' },
+                { path: 'driver', title: 'Driver Detail', ab: 'DD' },
+            ]
+        },
+        ];
+
+        localStorage.setItem("routes", JSON.stringify(ROUTES));
         this.menuItems = ROUTES.filter(menuItem => menuItem);
-        var items = [...this.menuItems];
+        var items = [];
         if (this.user.role.name.includes(Role.DRIVER)) {
             let itemProceeded = 0;
-            this.menuItems.forEach((item, index,array) => {
+            this.menuItems.forEach((item, index, array) => {
                 itemProceeded++;
-                if(item.path.includes("/administrations")){
-                    let index = this.menuItems.indexOf(item);
-                    if(index !== -1) {
-                        items.splice(index,1);
-                    }
+                if (item.path.includes("/driverpage")) {
+                    items.push(item);
                 }
-                if(itemProceeded == array.length){
+                if (itemProceeded == array.length) {
                     this.menuItems = items;
                 }
+            });
+        }
+        else if (this.user.role.name.includes(Role.CENTRALMANAGER)) {
+            let itemProceeded = 0;
+            
+            this.menuItems.forEach((item, index, array) => {
+                itemProceeded++;               
+                if (item.path.includes("/administrations")) {
+                    items.push(item);
+                    for (let i = 0; i < item.children.length; i++) {
+                        if (item.children[i].path != "centralmanager") {
+                            item.children.splice(i, 1);
+                            i--;
+                        }
+                    }
+                }
+                if (itemProceeded == array.length) {
+                    this.menuItems = items;
+                }
+
             });
         }
         var mainPanel = document.getElementsByClassName('main-panel')[0];
