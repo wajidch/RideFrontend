@@ -40,7 +40,9 @@ export class creaeterideComponent implements OnInit {
     }
 
     createRide() {
-        this.ride.carId = this.car._id;
+        if(this.car){
+            this.ride.carId = this.car._id;
+        } 
         this.ride.userId = this.user._id;
         var postData = JSON.stringify(this.ride);
         this.appServiceManager.post('rides', postData).subscribe(res => {
