@@ -15,6 +15,7 @@ import { adminoverviewComponent } from './adminoverview/adminoverview.component'
 import { MessageDialogModule } from 'app/components/message.module';
 import { RoleComponent } from './user-management/role.component';
 import { UserComponent } from './user-management/user.component';
+import { PlannedRideComponent } from './centralmanager/planride.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -31,7 +32,8 @@ import { UserComponent } from './user-management/user.component';
     changepasswordComponent,
     adminoverviewComponent,
     RoleComponent,
-    UserComponent
+    UserComponent,
+    PlannedRideComponent
 
   ]
 })

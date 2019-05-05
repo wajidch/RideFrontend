@@ -52,17 +52,22 @@ export class registercarComponent implements OnInit {
 
     confirmUpdate(car: CarModel) {
         this.car = car;
+        this.car.password = "";
         this.selectedUser = this.car.user;
     }
 
     updateCar(car: CarModel) {
         car.user = this.selectedUser;
-        var putData = JSON.stringify(car);
-        this.appServiceManager.put('cars/' + this.car._id, putData).subscribe(res => {
-            console.log("ress", res);
-            this.btnModalEditClose.nativeElement.click();
-            this.listOfCar();
-        })
+        if(car.user && car.carNumber){
+            var putData = JSON.stringify(car);
+            this.appServiceManager.put('cars/' + this.car._id, putData).subscribe(res => {
+                console.log("ress", res);
+                this.btnModalEditClose.nativeElement.click();
+                this.listOfCar();
+            });
+        } else {
+            alert('Please fill all the fields');
+        } 
     }
 
     confirmDelete(carId) {

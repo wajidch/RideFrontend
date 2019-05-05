@@ -53,7 +53,7 @@ export class changepasswordComponent implements OnInit {
         this.car._id = this.myControl.value._id;
         this.car.carNumber = this.myControl.value.carNumber;
         var postData = JSON.stringify(this.car);
-        this.appServiceManager.put('cars/' + this.car._id, postData).subscribe(res => {
+        this.appServiceManager.put('cars/changePassword/' + this.car._id, postData).subscribe(res => {
             this.message = "Password is Successfully Updated";
             this.dialogTitle = "Success Message";
             this.btnMsgOpen.nativeElement.click();

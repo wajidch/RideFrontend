@@ -8,6 +8,7 @@ import { CarModel } from 'app/models/car.models';
 import { RideModel } from 'app/models/ride.models';
 import { DriverModel } from 'app/models/driver.models';
 import { AppServiceManager } from 'app/services/appServiceManager';
+import { UserModel } from 'app/models/user.models';
 
 declare const $: any;
 
@@ -23,7 +24,8 @@ export class centralmanagerComponent implements OnInit {
 
     //All drivers and rides
     rides: RideModel[] = [];
-    drivers: DriverModel[] = [];
+    //drivers: DriverModel[] = [];
+    drivers: UserModel[] = [];
 
     //planned rides for today
     ride: RideModel;
@@ -43,7 +45,7 @@ export class centralmanagerComponent implements OnInit {
     ngOnInit() {
         this.ride = new RideModel();
         this.selectedRide = new RideModel();
-        this.getAllDrivers();
+        this.getUsers();
         this.getAllRides();
         this.getTodayPlannedRides();
         this.getTodayPlannedShifts();
@@ -76,7 +78,7 @@ export class centralmanagerComponent implements OnInit {
         this.appServiceManager.post('rides/todayPlannedRides', postData).subscribe(res => {
             this.btnModalcreatePlannedRide.nativeElement.click();
             this.getTodayPlannedRides();
-            
+
         });
     }
 
@@ -85,18 +87,40 @@ export class centralmanagerComponent implements OnInit {
             this.todayPlannedRides = res;
         });
     }
+    
+    getUsers() {
+        this.appServiceManager.get('users').subscribe((res: UserModel[]) => {
+            if (res.length > 0) {
+                var itemProceeded = 0;
+                res.forEach((user, index, array) => {
+                    itemProceeded++;
+                    if (user.role.name.toLowerCase().includes("driver")) {
+                        this.drivers.push(user);
+                    }
+                    if (itemProceeded == array.length) {
+                        this.filteredDrivers = this.driverControl.valueChanges
+                            .pipe(
+                                startWith<string | DriverModel>(''),
+                                map(value => typeof value === 'string' ? value : value.firstName),
+                                map(name => name ? this._driverFilter(name) : this.drivers.slice())
+                            );
+                    }
+                });
 
-    getAllDrivers() {
-        this.appServiceManager.get('drivers').subscribe(res => {
-            this.drivers = res;
-            this.filteredDrivers = this.driverControl.valueChanges
-                .pipe(
-                    startWith<string | DriverModel>(''),
-                    map(value => typeof value === 'string' ? value : value.firstName),
-                    map(name => name ? this._driverFilter(name) : this.drivers.slice())
-                );
+            }
         });
     }
+    // getAllDrivers() {
+    //     this.appServiceManager.get('drivers').subscribe(res => {
+    //         this.drivers = res;
+    //         this.filteredDrivers = this.driverControl.valueChanges
+    //             .pipe(
+    //                 startWith<string | DriverModel>(''),
+    //                 map(value => typeof value === 'string' ? value : value.firstName),
+    //                 map(name => name ? this._driverFilter(name) : this.drivers.slice())
+    //             );
+    //     });
+    // }
 
     driverDisplayFn(driver?: DriverModel): string | undefined {
         return driver ? driver.firstName : undefined;
@@ -122,7 +146,7 @@ export class centralmanagerComponent implements OnInit {
         this.appServiceManager.post('rides/todayPlannedShifts', postData).subscribe(res => {
             this.btnModalcreatePlannedShift.nativeElement.click();
             this.getTodayPlannedShifts();
-            
+
         });
     }
 
@@ -139,14 +163,14 @@ export class centralmanagerComponent implements OnInit {
 
     sendRide() {
         let obj = {
-            driverCarId:this.driverControl.value.carId,
+            driverCarId: this.driverControl.value.carId,
             rideId: this.selectedRide._id
         }
         var postData = JSON.stringify(obj);
         this.appServiceManager.put('rides/sendRide', postData).subscribe(res => {
             this.btnModalSendRide.nativeElement.click();
             this.getAllRides();
-            
+
         });
     }
 }

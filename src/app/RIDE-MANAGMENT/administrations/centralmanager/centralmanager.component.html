@@ -103,8 +103,8 @@
               <i class="material-icons">assignment</i>
             </div>
             <h4 class="card-title">Planned Rides for Today</h4>
-            <button data-toggle="modal" data-target="#modal-createPlannedRide"
-              class="btn btn-primary btn-round mat-raised-button pull-right" style="margin-top:-30px"
+            <!-- data-toggle="modal" data-target="#modal-createPlannedRide" -->
+            <button [routerLink]="['/administrations/plannedRide']" class="btn btn-primary btn-round mat-raised-button pull-right" style="margin-top:-30px"
               mat-raised-button><span class="mat-button-wrapper">Create</span>
               <div class="mat-button-ripple mat-ripple" matripple></div>
               <div class="mat-button-focus-overlay"></div>

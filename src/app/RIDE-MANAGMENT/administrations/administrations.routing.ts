@@ -7,6 +7,7 @@ import { changepasswordComponent } from './changepassword/changepassword.compone
 import { adminoverviewComponent } from './adminoverview/adminoverview.component';
 import { RoleComponent } from './user-management/role.component';
 import { UserComponent } from './user-management/user.component';
+import { PlannedRideComponent } from './centralmanager/planride.component';
 
 
 export const administrationsRoutes: Routes = [
@@ -27,6 +28,12 @@ export const administrationsRoutes: Routes = [
         children: [{
             path: 'centralmanager',
             component: centralmanagerComponent
+        }]
+    }, {
+        path: '',
+        children: [{
+            path: 'plannedRide',
+            component: PlannedRideComponent
         }]
     }, {
         path: '',
