@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { CarModel } from 'app/models/car.models';
 import { RideModel } from 'app/models/ride.models';
-import { DriverModel } from 'app/models/driver.models';
+//import { DriverModel } from 'app/models/driver.models';
 import { AppServiceManager } from 'app/services/appServiceManager';
 import { UserModel } from 'app/models/user.models';
 
@@ -38,7 +38,7 @@ export class centralmanagerComponent implements OnInit {
     filteredCars: Observable<CarModel[]>;
 
     driverControl = new FormControl();
-    filteredDrivers: Observable<DriverModel[]>;
+    filteredDrivers: Observable<UserModel[]>;
     selectedRide: RideModel;
 
     constructor(private appServiceManager: AppServiceManager) { }
@@ -100,7 +100,7 @@ export class centralmanagerComponent implements OnInit {
                     if (itemProceeded == array.length) {
                         this.filteredDrivers = this.driverControl.valueChanges
                             .pipe(
-                                startWith<string | DriverModel>(''),
+                                startWith<string | UserModel>(''),
                                 map(value => typeof value === 'string' ? value : value.firstName),
                                 map(name => name ? this._driverFilter(name) : this.drivers.slice())
                             );
@@ -122,11 +122,11 @@ export class centralmanagerComponent implements OnInit {
     //     });
     // }
 
-    driverDisplayFn(driver?: DriverModel): string | undefined {
+    driverDisplayFn(driver?: UserModel): string | undefined {
         return driver ? driver.firstName : undefined;
     }
 
-    private _driverFilter(name: string): DriverModel[] {
+    private _driverFilter(name: string): UserModel[] {
         const filterValue = name.toLowerCase();
 
         return this.drivers.filter(driver => driver.firstName.toLowerCase().indexOf(filterValue) === 0);
@@ -163,11 +163,11 @@ export class centralmanagerComponent implements OnInit {
 
     sendRide() {
         let obj = {
-            driverCarId: this.driverControl.value.carId,
+            userId: this.driverControl.value._id,
             rideId: this.selectedRide._id
         }
         var postData = JSON.stringify(obj);
-        this.appServiceManager.put('rides/sendRide', postData).subscribe(res => {
+        this.appServiceManager.put('rides/send/Ride', postData).subscribe(res => {
             this.btnModalSendRide.nativeElement.click();
             this.getAllRides();
 
