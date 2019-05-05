@@ -11,6 +11,8 @@ import { ExcelService } from 'app/services/excel.service';
 export class allridesComponent implements OnInit {
     @ViewChild("btnModalDeleteClose") btnModalDeleteClose: ElementRef;
     @ViewChild("btnMsgOpen") btnMsgOpen: ElementRef;
+    @ViewChild("btnCloseUpdateride") btnCloseUpdateride : ElementRef
+
     message: String = '';
     dialogTitle: String = '';
     
@@ -118,5 +120,17 @@ export class allridesComponent implements OnInit {
             this.getAll();
         });
     }
+
+    confirmUpdate(ride: RideModel) {
+        this.ride = ride;
+     }
+ 
+     updateRide() {
+         var putData = JSON.stringify(this.ride);
+         this.appServiceManager.put('rides/' + this.ride._id, putData).subscribe(res => {
+             this.btnCloseUpdateride.nativeElement.click();
+             this.getAll();
+         })
+     } 
 }
 
