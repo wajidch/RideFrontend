@@ -21,7 +21,7 @@ export class centralmanagerComponent implements OnInit {
     @ViewChild('btnModalcreatePlannedRide') btnModalcreatePlannedRide: ElementRef;
     @ViewChild('btnModalcreatePlannedShift') btnModalcreatePlannedShift: ElementRef;
     @ViewChild('btnModalSendRide') btnModalSendRide: ElementRef;
-
+    @ViewChild("btnCloseUpdateride") btnCloseUpdateride : ElementRef
     //All drivers and rides
     rides: RideModel[] = [];
     //drivers: DriverModel[] = [];
@@ -173,4 +173,19 @@ export class centralmanagerComponent implements OnInit {
 
         });
     }
+ 
+
+    confirmUpdate(ride: RideModel) {
+        this.ride = ride;
+     }
+ 
+     updateRide() {
+         var putData = JSON.stringify(this.ride);
+         this.appServiceManager.put('rides/' + this.ride._id, putData).subscribe(res => {
+             this.btnCloseUpdateride.nativeElement.click();
+             this.getAllRides();
+             this.getTodayPlannedRides();
+             this.getTodayPlannedShifts();
+         })
+     } 
 }
