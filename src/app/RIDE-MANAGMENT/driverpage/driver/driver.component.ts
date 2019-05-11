@@ -72,4 +72,19 @@ export class driverComponent implements OnInit {
             this.getLastRides();
         })
     } 
+    //Update status
+    onRide(){
+        this.user.status = 'onride';
+        this.updateStatus();
+    }
+    onReadyForRide(){
+        this.user.status = 'online';
+        this.updateStatus();
+    }
+    updateStatus() {
+        var putData = JSON.stringify(this.user);
+        this.appServiceManager.put('users/update-status/'+ this.user._id,putData).subscribe(res => {
+            sessionStorage.setItem("currentUser", JSON.stringify(res));
+        });
+    }
 }

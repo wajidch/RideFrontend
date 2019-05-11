@@ -18,11 +18,12 @@
                     <h5>My Status</h5>
                     <div class="d-flex flex-column flex-sm-row gap-items-2 gap-y mt-16">
                       <div class="file-group file-group-inline">
-                        <button class="btn btn-sm btn-w-lg btn-outline  btn-round btn-screen" type="button">On a
+                        <button (click)="onRide()" class="btn btn-sm btn-w-lg btn-outline  btn-round btn-screen" type="button">On a
                           ride</button>
                       </div>
 
-                      <a class="btn btn-sm btn-w-lg btn-outline btn-round btn-screen" [routerLink]="">Ready for Ride</a>
+                      <a (click)="onReadyForRide()" [routerLink]=""
+                      class="btn btn-sm btn-w-lg btn-outline btn-round btn-screen" >Ready for Ride</a>
                     </div>
                   </div>
                 </div>
