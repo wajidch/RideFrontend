@@ -83,11 +83,6 @@
                     <td>{{ride.startPoint}} / {{ride.endPoint}}</td>
                     <td>{{ride.startTime}}</td>
                     <td>{{ride.endTime}}</td>
-                    <td>
-                      <button data-toggle="modal" data-target="#modal-sendRide" (click)="onSendRideDialog(ride)"
-                        style="width: 57px; padding: 8px;" class="btn btn-w-md btn-round btn-primary">
-                        <i class="ti-plus"></i>Send</button>
-                    </td>
                     <td class="td-actions text-right">
                         <button  mat-raised-button type="button" (click)="confirmUpdate(ride)" data-toggle="modal"
                           data-target="#modal-updateride" class="btn btn-success btn-link">
@@ -132,6 +127,11 @@
                     <td>{{i + 1}}</td>
                     <td>{{planRide.customer}}</td>
                     <td>{{planRide.startPoint}} / {{planRide.endPoint}}</td>
+                    <td>
+                      <button data-toggle="modal" data-target="#modal-sendRide" (click)="onSendRideDialog(planRide)"
+                        style="width: 57px; padding: 8px;" class="btn btn-w-md btn-round btn-primary">
+                        <i class="ti-plus"></i>Send</button>
+                    </td>
                     <td class="td-actions text-right">
                         <button  mat-raised-button type="button" (click)="confirmUpdate(planRide)" data-toggle="modal"
                           data-target="#modal-updateride" class="btn btn-success btn-link">
