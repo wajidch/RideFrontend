@@ -117,12 +117,6 @@ export class SidebarComponent implements OnInit {
                 itemProceeded++;
                 if (item.path.includes("/administrations")) {
                     items.push(item);
-                    for (let i = 0; i < item.children.length; i++) {
-                        if (item.children[i].path == "centralmanager") {
-                            item.children.splice(i, 1);
-                            i--;
-                        }
-                    }
                 }
                 if (itemProceeded == array.length) {
                     this.menuItems = items;
