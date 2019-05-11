@@ -94,13 +94,31 @@ export class SidebarComponent implements OnInit {
         }
         else if (this.user.role.name.includes(Role.CENTRALMANAGER)) {
             let itemProceeded = 0;
-            
+
             this.menuItems.forEach((item, index, array) => {
-                itemProceeded++;               
+                itemProceeded++;
                 if (item.path.includes("/administrations")) {
                     items.push(item);
                     for (let i = 0; i < item.children.length; i++) {
                         if (item.children[i].path != "centralmanager") {
+                            item.children.splice(i, 1);
+                            i--;
+                        }
+                    }
+                }
+                if (itemProceeded == array.length) {
+                    this.menuItems = items;
+                }
+
+            });
+        } else if (this.user.role.name.includes(Role.ADMIN)) {
+            let itemProceeded = 0;
+            this.menuItems.forEach((item, index, array) => {
+                itemProceeded++;
+                if (item.path.includes("/administrations")) {
+                    items.push(item);
+                    for (let i = 0; i < item.children.length; i++) {
+                        if (item.children[i].path == "centralmanager") {
                             item.children.splice(i, 1);
                             i--;
                         }
