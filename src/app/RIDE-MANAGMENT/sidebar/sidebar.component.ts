@@ -81,36 +81,61 @@ export class SidebarComponent implements OnInit {
         this.menuItems = ROUTES.filter(menuItem => menuItem);
         var items = [];
         if (this.user.role.name.includes(Role.DRIVER)) {
-            let itemProceeded = 0;
-            this.menuItems.forEach((item, index, array) => {
-                itemProceeded++;
-                if (item.path.includes("/driverpage")) {
-                    items.push(item);
-                }
-                if (itemProceeded == array.length) {
-                    this.menuItems = items;
-                }
-            });
+            let obj1 = {
+                path: '/driverpage/createride',
+                title: 'Create Ride',
+                type: 'link',
+                icontype: 'CR'
+                
+            };
+            let obj2 = {
+                path: '/driverpage/driver',
+                title: 'Driver Detail',
+                type: 'link',
+                icontype: 'DD' 
+            }
+            items.push(obj1);
+            items.push(obj2);
+            this.menuItems = items;
+            // let itemProceeded = 0;
+            // this.menuItems.forEach((item, index, array) => {
+            //     itemProceeded++;
+            //     if (item.path.includes("/driverpage")) {
+            //         items.push(item);
+            //     }
+            //     if (itemProceeded == array.length) {
+            //         this.menuItems = items;
+            //     }
+            // });
         }
         else if (this.user.role.name.includes(Role.CENTRALMANAGER)) {
-            let itemProceeded = 0;
+            let obj1 = {
+                path: '/administrations/centralmanager',
+                title: 'Central Manager',
+                type: 'link',
+                icontype: 'CM'
+                
+            };
+            items.push(obj1);
+            this.menuItems = items;
+           // let itemProceeded = 0;
 
-            this.menuItems.forEach((item, index, array) => {
-                itemProceeded++;
-                if (item.path.includes("/administrations")) {
-                    items.push(item);
-                    for (let i = 0; i < item.children.length; i++) {
-                        if (item.children[i].path != "centralmanager") {
-                            item.children.splice(i, 1);
-                            i--;
-                        }
-                    }
-                }
-                if (itemProceeded == array.length) {
-                    this.menuItems = items;
-                }
+            // this.menuItems.forEach((item, index, array) => {
+            //     itemProceeded++;
+            //     if (item.path.includes("/administrations")) {
+            //         items.push(item);
+            //         for (let i = 0; i < item.children.length; i++) {
+            //             if (item.children[i].path != "centralmanager") {
+            //                 item.children.splice(i, 1);
+            //                 i--;
+            //             }
+            //         }
+            //     }
+            //     if (itemProceeded == array.length) {
+            //         this.menuItems = items;
+            //     }
 
-            });
+            // });
         } else if (this.user.role.name.includes(Role.ADMIN)) {
             let itemProceeded = 0;
             this.menuItems.forEach((item, index, array) => {
