@@ -4,6 +4,7 @@ import { RideModel } from 'app/models/ride.models';
 import { AuthService } from 'app/services/auth/auth.service';
 import { ExcelService } from 'app/services/excel.service';
 import { Router } from '@angular/router';
+import {MessageDialogComponent} from 'app/components/message-dialog';
 
 @Component({
     selector: 'app-planride-cmp',
@@ -13,6 +14,8 @@ import { Router } from '@angular/router';
 
 export class PlannedRideComponent implements OnInit {
     @ViewChild("btnMsgOpen") btnMsgOpen: ElementRef;
+    @ViewChild(MessageDialogComponent) messageDialogComponent; 
+    
     ride: RideModel;
     car: any;
     user: any;
@@ -47,10 +50,16 @@ export class PlannedRideComponent implements OnInit {
         this.ride.userId = this.user._id;
         var postData = JSON.stringify(this.ride);
         this.appServiceManager.post('rides/todayPlannedRides', postData).subscribe(res => {
-            this.router.navigateByUrl('administrations/centralmanager');
-            // this.message = "Ride is Successfully Created";
-            // this.dialogTitle = "Success Message";
-            // this.btnMsgOpen.nativeElement.click();
+
+            this.message = "Plan ride is Successfully Created";
+            this.dialogTitle = "Success Message";
+            this.btnMsgOpen.nativeElement.click();
+            setTimeout(()=> {
+                this.messageDialogComponent.btnMsgClose.nativeElement.click();
+                setTimeout(()=>{
+                    this.router.navigateByUrl('administrations/centralmanager');
+                },1000);
+            }, 3000);
         });
     }
     exportAsXLSX(): void {

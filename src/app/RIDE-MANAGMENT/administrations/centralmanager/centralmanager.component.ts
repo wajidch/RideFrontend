@@ -22,6 +22,10 @@ export class centralmanagerComponent implements OnInit {
     @ViewChild('btnModalcreatePlannedShift') btnModalcreatePlannedShift: ElementRef;
     @ViewChild('btnModalSendRide') btnModalSendRide: ElementRef;
     @ViewChild("btnCloseUpdateride") btnCloseUpdateride : ElementRef
+    @ViewChild("btnMsgOpen") btnMsgOpen: ElementRef;
+    message: String = '';
+    dialogTitle: String = '';
+
     //All drivers and rides
     rides: RideModel[] = [];
     //drivers: DriverModel[] = [];
@@ -169,6 +173,9 @@ export class centralmanagerComponent implements OnInit {
         var postData = JSON.stringify(obj);
         this.appServiceManager.put('rides/send/Ride', postData).subscribe(res => {
             this.btnModalSendRide.nativeElement.click();
+            this.message = "Ride is Successfully Send to Driver";
+            this.dialogTitle = "Success Message";
+            this.btnMsgOpen.nativeElement.click();
             this.getAllRides();
 
         });

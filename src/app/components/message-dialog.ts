@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core'; 
+import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core'; 
 
 @Component({
     selector: 'app-message-dialog',
@@ -6,6 +6,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 
 export class MessageDialogComponent implements OnInit {
+    @ViewChild("btnMsgClose") btnMsgClose: ElementRef;
     @Input() message: any;
     @Input() dialogTitle: any;
     constructor(){}

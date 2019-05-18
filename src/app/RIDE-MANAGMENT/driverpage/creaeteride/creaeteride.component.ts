@@ -5,6 +5,7 @@ import { AuthService } from 'app/services/auth/auth.service';
 import { ExcelService } from 'app/services/excel.service';
 import { Role } from 'app/utilities/constants';
 import { Router } from '@angular/router';
+import { MessageDialogComponent } from 'app/components/message-dialog';
 
 @Component({
     selector: 'app-creaeteride-cmp',
@@ -14,6 +15,7 @@ import { Router } from '@angular/router';
 
 export class creaeterideComponent implements OnInit {
     @ViewChild("btnMsgOpen") btnMsgOpen: ElementRef;
+    @ViewChild(MessageDialogComponent) messageDialogComponent; 
     ride: RideModel;
     car: any;
     user: any;
@@ -49,7 +51,15 @@ export class creaeterideComponent implements OnInit {
         var postData = JSON.stringify(this.ride);
         this.appServiceManager.post('rides', postData).subscribe(res => {
             if (this.user.role.name.includes(Role.DRIVER)) {
-                this.router.navigateByUrl('/driverpage/driver');
+                this.message = "Ride is Successfully Created";
+                this.dialogTitle = "Success Message";
+                this.btnMsgOpen.nativeElement.click(); 
+                setTimeout(()=> {
+                    this.messageDialogComponent.btnMsgClose.nativeElement.click();
+                    setTimeout(()=>{
+                        this.router.navigateByUrl('/driverpage/driver');
+                    },1000);
+                }, 3000);
             } else {
                 this.message = "Ride is Successfully Created";
                 this.dialogTitle = "Success Message";
