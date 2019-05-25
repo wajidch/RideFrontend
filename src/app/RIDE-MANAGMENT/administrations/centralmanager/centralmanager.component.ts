@@ -173,7 +173,10 @@ export class centralmanagerComponent implements OnInit {
         var postData = JSON.stringify(obj);
         this.appServiceManager.put('rides/send/Ride', postData).subscribe(res => {
             this.btnModalSendRide.nativeElement.click();
-            this.message = "Ride is Successfully Send to Driver";
+            this.message = "Ride is Successfully Send to Driver<br /><b>******Ride Details******</b><br />";
+            this.message += "<b>From:</b> "+ this.selectedRide.startPoint + "<br />";
+            this.message += "<b>Destination:</b> "+ this.selectedRide.endPoint + "<br />";
+            this.message += "<b>Customer:</b> "+ this.selectedRide.customer + "<br />";
             this.dialogTitle = "Success Message";
             this.btnMsgOpen.nativeElement.click();
             this.getAllRides();
