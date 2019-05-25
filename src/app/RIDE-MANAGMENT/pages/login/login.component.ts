@@ -10,6 +10,7 @@ import { CarModel } from 'app/models/car.models';
 import { Observable } from 'rxjs';
 import { FormControl } from '@angular/forms';
 declare var $: any;
+import { Role } from 'app/utilities/constants';
 
 @Component({
     selector: 'app-login-cmp',
@@ -78,7 +79,12 @@ export class LoginComponent implements OnInit, OnDestroy {
                console.log(res.obj);
                sessionStorage.setItem('car',JSON.stringify(res.obj.car));
                sessionStorage.setItem('currentUser',JSON.stringify(res.obj.user));
-            this.router.navigateByUrl('dashboard');
+               if (res.obj.user.role.name.includes(Role.DRIVER)) {
+                this.router.navigateByUrl('driverpage/driver');
+               } else {
+                this.router.navigateByUrl('dashboard');
+               }
+          
            } else {
                alert(res.error);
            }

@@ -25,8 +25,7 @@
                 </div>
                 <div class="col-md-4">
                   <mat-form-field class="example-full-width">
-                    <input type="time" [(ngModel)]="ride.startTime" name="startTime" matInput
-                      placeholder="Start Time">
+                    <input type="time" [(ngModel)]="ride.startTime" name="startTime" matInput placeholder="Start Time">
                   </mat-form-field>
 
                 </div>
@@ -177,13 +176,20 @@
               </div>
 
               <div class="row">
-                <div class="col-md-11 pull-right" style="padding-right:40px">
-                  <button *ngIf="user.role.name != 'Driver'" (click)="exportAsXLSX()" class="btn btn-w-md btn-round btn-warning" style="float:right">Export Excel</button>
+                <div class="col-md-8 pull-right" style="padding-right:40px">
+                  <button *ngIf="user.role.name != 'Driver'" (click)="exportAsXLSX()"
+                    class="btn btn-w-md btn-round btn-warning" style="float:right">Export Excel</button>
                 </div>
 
-                <div class="col-md-1 pull-right">
+                <div class="col-md-4">
                   <button (click)="createRide()" class="btn btn-w-md btn-round btn-primary" style="float:right">Let's
                     Go</button>
+                  
+                    <a [routerLink]="['/driverpage/driver']" class="btn btn-w-md btn-round btn-warning"
+                      style="float:right">
+                      Driver Details
+                    </a>
+                   
                 </div>
               </div>
             </div>
@@ -195,4 +201,4 @@
 </div>
 
 <input type="button" hidden #btnMsgOpen data-toggle="modal" data-target="#modal-message" />
-<app-message-dialog [message]="message" [dialogTitle]="dialogTitle" ></app-message-dialog>
+<app-message-dialog [message]="message" [dialogTitle]="dialogTitle"></app-message-dialog>

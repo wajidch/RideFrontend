@@ -81,21 +81,22 @@ export class SidebarComponent implements OnInit {
         this.menuItems = ROUTES.filter(menuItem => menuItem);
         var items = [];
         if (this.user.role.name.includes(Role.DRIVER)) {
-            let obj1 = {
-                path: '/driverpage/createride',
-                title: 'Create Ride',
-                type: 'link',
-                icontype: 'CR'
+            // let obj1 = {
+            //     path: '/driverpage/createride',
+            //     title: 'Create Ride',
+            //     type: 'link',
+            //     icontype: 'CR'
                 
-            };
-            let obj2 = {
-                path: '/driverpage/driver',
-                title: 'Driver Detail',
-                type: 'link',
-                icontype: 'DD' 
-            }
-            items.push(obj1);
-            items.push(obj2);
+            // };
+            // let obj2 = {
+            //     path: '/driverpage/driver',
+            //     title: 'Driver Detail',
+            //     type: 'link',
+            //     icontype: 'DD' 
+            // }
+            // items.push(obj1);
+            // items.push(obj2);
+            // this.menuItems = items;
             this.menuItems = items;
             // let itemProceeded = 0;
             // this.menuItems.forEach((item, index, array) => {
