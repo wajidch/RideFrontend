@@ -14,14 +14,15 @@ declare const $: any;
 
 @Component({
     selector: 'app-centralmanager-cmp',
-    templateUrl: 'centralmanager.component.html'
+    templateUrl: 'centralmanager.component.html',
+    styleUrls: ['centralmanager.component.css']
 })
 export class centralmanagerComponent implements OnInit {
-
+    @ViewChild("btnModalDeleteClose") btnModalDeleteClose: ElementRef;
     @ViewChild('btnModalcreatePlannedRide') btnModalcreatePlannedRide: ElementRef;
     @ViewChild('btnModalcreatePlannedShift') btnModalcreatePlannedShift: ElementRef;
     @ViewChild('btnModalSendRide') btnModalSendRide: ElementRef;
-    @ViewChild("btnCloseUpdateride") btnCloseUpdateride : ElementRef
+    @ViewChild("btnCloseUpdateride") btnCloseUpdateride: ElementRef
     @ViewChild("btnMsgOpen") btnMsgOpen: ElementRef;
     message: String = '';
     dialogTitle: String = '';
@@ -91,7 +92,7 @@ export class centralmanagerComponent implements OnInit {
             this.todayPlannedRides = res;
         });
     }
-    
+
     getUsers() {
         this.appServiceManager.get('users').subscribe((res: UserModel[]) => {
             if (res.length > 0) {
@@ -174,28 +175,42 @@ export class centralmanagerComponent implements OnInit {
         this.appServiceManager.put('rides/send/Ride', postData).subscribe(res => {
             this.btnModalSendRide.nativeElement.click();
             this.message = "Ride is Successfully Send to Driver<br /><b>******Ride Details******</b><br />";
-            this.message += "<b>From:</b> "+ this.selectedRide.startPoint + "<br />";
-            this.message += "<b>Destination:</b> "+ this.selectedRide.endPoint + "<br />";
-            this.message += "<b>Customer:</b> "+ this.selectedRide.customer + "<br />";
+            this.message += "<b>From:</b> " + this.selectedRide.startPoint + "<br />";
+            this.message += "<b>Destination:</b> " + this.selectedRide.endPoint + "<br />";
+            this.message += "<b>Customer:</b> " + this.selectedRide.customer + "<br />";
             this.dialogTitle = "Success Message";
             this.btnMsgOpen.nativeElement.click();
             this.getAllRides();
 
         });
     }
- 
+
 
     confirmUpdate(ride: RideModel) {
         this.ride = ride;
-     }
- 
-     updateRide() {
-         var putData = JSON.stringify(this.ride);
-         this.appServiceManager.put('rides/' + this.ride._id, putData).subscribe(res => {
-             this.btnCloseUpdateride.nativeElement.click();
-             this.getAllRides();
-             this.getTodayPlannedRides();
-             this.getTodayPlannedShifts();
-         })
-     } 
+    }
+
+    updateRide() {
+        var putData = JSON.stringify(this.ride);
+        this.appServiceManager.put('rides/' + this.ride._id, putData).subscribe(res => {
+            this.btnCloseUpdateride.nativeElement.click();
+            this.getAllRides();
+            this.getTodayPlannedRides();
+            this.getTodayPlannedShifts();
+        })
+    }
+
+    confirmDelete(rideId) {
+        this.ride._id = rideId;
+    }
+
+    deleteRide() {
+        this.appServiceManager.detele('rides/' + this.ride._id).subscribe(res => {
+            console.log("ress", res);
+            this.btnModalDeleteClose.nativeElement.click();
+            this.getAllRides();
+            this.getTodayPlannedRides();
+            this.getTodayPlannedShifts();
+        });
+    }
 }
